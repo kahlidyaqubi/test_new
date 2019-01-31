@@ -10,6 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::resource("/posts","PostController");
+Route::resource("/comment","CommentController");
+
+Route::get('/first_pusher','TestController@index');
+Route::get('/send','TestController@send');
     Route::get('/', function () {
     return view('welcome');
 });
