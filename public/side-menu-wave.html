@@ -1,0 +1,598 @@
+<!doctype html>
+ <html lang="en"> 
+<!-- Mirrored from demo.newtemplate.net/resume/template/side-menu-wave.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Oct 2018 17:24:03 GMT -->
+<head> 
+    <!-- Required meta tags --> <meta charset="utf-8"> <title>Resume - Responsive Personal Portfolio / CV Template</title> <meta name="description" content=""> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <!--Bootstrap--> <link rel="stylesheet" href="css/bootstrap.css">
+   <!-- <link rel="stylesheet" href="css/bootstrap-rtl.css"> -->
+    <!--Awesome fonts--> 
+    <link rel="stylesheet" href="css/fontawesome.css"> 
+    <!--fontastic fonts--> <link rel="stylesheet" href="css/fontastic.css">
+    <!--lity--> <link rel="stylesheet" href="css/lity.css"> 
+    <!--animate--> <link rel="stylesheet" href="css/animate.css">
+    <!--carousel--> <link rel="stylesheet" href="css/owl.carousel.css"> 
+    <!--sweetalert--> <link rel="stylesheet" href="css/sweetalert.css"> 
+    <!--whatsapp button--> <link rel="stylesheet" href="css/whatsapp.css"> 
+    <!--custom--> <link rel="stylesheet" href="css/style.css"> <!--left side-->
+    <link rel="stylesheet" href="css/side-menu.css"> <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600%7CRaleway:300,400,500,600,700,800" rel="stylesheet">
+    </head> <body>
+		 <div id="loader-wrapper">
+        <div class="world">
+            <img src="images/loader.svg" alt="" /> </div>
+    </div> 
+
+	<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content-customized">
+		<div class="modal-header" align="center">
+			<!-- <img class="img-circle img_customized" id="img_logo" src="images/logo_png.png"> -->
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+			</button>
+		</div>
+      <div class="modal-body">
+	  <!-- Begin # DIV Form -->
+                <div id="div-forms">
+                
+                    <!-- Begin # Login Form -->
+                    <form id="login-form">
+		                <div class="modal-body">
+				    		<div id="div-login-msg">
+                                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-login-msg">من فضلك أدخل  بيانات الدخول</span>
+                            </div>
+				    		<input id="login_username" class="form-control form-control-rtl" type="text" placeholder="البريد الالكتروني" required>
+				    		<input id="login_password" class="form-control form-control-rtl" type="password" placeholder="كلمة المرور" required>
+                            <div class="checkbox">
+                                <label>
+                                   تذكرني <input type="checkbox">
+                                </label>
+                            </div>
+        		    	</div>
+				        <div class="modal-footer">
+				    	    <div>
+                                <a href="#password reset handler">نسيت كلمة السر؟</a>
+                                <!-- <button id="login_register_btn" type="button" class="btn btn-link">تسجيل الاشتراك</button> -->
+                            </div>
+							 <div>
+                                <button type="submit" class="btn form-control-customized">دخول</button>
+                            </div>
+				        </div>
+                    </form>
+                    <!-- End # Login Form -->
+                    
+                    <!-- Begin | Lost Password Form -->
+                    <form id="lost-form" style="display:none;">
+    	    		    <div class="modal-body">
+		    				<div id="div-lost-msg">
+                                <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-lost-msg">Type your e-mail.</span>
+                            </div>
+		    				<input id="lost_email" class="form-control" type="text" placeholder="E-Mail (type ERROR for error effect)" required>
+            			</div>
+		    		    <div class="modal-footer">
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Send</button>
+                            </div>
+                            <div>
+                                <button id="lost_login_btn" type="button" class="btn btn-link">Log In</button>
+                                <button id="lost_register_btn" type="button" class="btn btn-link">Register</button>
+                            </div>
+		    		    </div>
+                    </form>
+                    <!-- End | Lost Password Form -->
+                    
+                    <!-- Begin | Register Form -->
+                    <form id="register-form" style="display:none;">
+            		    <div class="modal-body">
+		    				<div id="div-register-msg">
+                                <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-register-msg">Register an account.</span>
+                            </div>
+		    				<input id="register_username" class="form-control" type="text" placeholder="Username (type ERROR for error effect)" required>
+                            <input id="register_email" class="form-control" type="text" placeholder="E-Mail" required>
+                            <input id="register_password" class="form-control" type="password" placeholder="Password" required>
+            			</div>
+		    		    <div class="modal-footer">
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+                            </div>
+                            <div>
+                                <button id="register_login_btn" type="button" class="btn btn-link">Log In</button>
+                                <button id="register_lost_btn" type="button" class="btn btn-link">Lost Password?</button>
+                            </div>
+		    		    </div>
+                    </form>
+                    <!-- End | Register Form -->
+                    
+                </div>
+                <!-- End # DIV Form -->
+	 <!--  <form>
+          <div class="form-group">
+            <input type="text" class="form-control" id="email">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="password">
+          </div>
+		  <div class="form-group">
+            <button type="button" data-toggle="modal" data-target="#myModal" class="btn button-scheme">دخول</button>
+          </div>
+        </form> -->
+      </div>
+      <div class="modal-footer">
+       <!--  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- / Modal -->
+
+
+	<!--Left side wrap-->
+    <div class="left-side-area">
+        <!--Header-->
+        <header class="header-left-area"> 
+            <div class="container"> 
+                <!-- Nav -->
+				<nav class="navbar"> 
+                <div class="header-content"> 
+                    <div class="image-item">
+                        <!-- <div class="status active"></div>  -->
+                        <!-- if you want to use away instead of active. just need to change class active to away -->
+                        <img src="images/logo_png.png" alt="" /> </div> 
+                    <div class="caption-area"> 
+                        <h5 class="name">بطاقة ذوي الاحتاجات الخاصة</h5> 
+                 
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#side-menu" aria-controls="side-menu" aria-expanded="false" aria-label="Toggle navigation"> 
+                    <span class="navbar-toggler-icon">
+                        <span class="icon-th"></span>
+                    </span>
+                </button> 
+                <!--menu toggler ends! --> <!--menu main area--> 
+                <div class="menu-main-area align-items-center"> <!--menu --> 
+                    <div class="collapse navbar-collapse" id="side-menu"> 
+                        <ul id="menu_scroll" class="navbar-nav side-menu"> 
+                            <li><a href="#home" class="scroll active"><span class="icon-home-house-streamline"></span>الصفحة الرئيسية</a></li>
+                            <li><a href="#about" class="scroll"><span class="icon-map-streamline-user"></span>رؤية الموقع</a>
+                            </li> <li><a href="#services" class="scroll"><span class="icon-settings-streamline-1"></span>خدماتنا</a></li>
+							
+                            <!-- <li><a href="#portfolio" class="scroll"><span class="icon-streamline-suitcase-travel"></span> Portfolio</a></li>  -->
+                           <!-- <li><a href="#clients" class="scroll"><span class="icon-speech-streamline-talk-user"></span>الاحصائيات والمصادر</a></li>-->
+							<li><a href="#blog" class="scroll"><span class="icon-streamline-suitcase-travel"></span>المقالات</a></li>
+                            <li> <a href="#call" class="scroll"><span class="icon-speech-streamline-talk-user"></span>اتصل بنا</a></li> 
+							<li><button type="button" data-toggle="modal" data-target="#myModal" class="btn button-scheme form-control-customized">تسجيل الدخول</button></li> 
+                        </ul> </div>
+                    <!--menu ends!-->
+					</div> 
+                <!--menu main area ends!--> 
+				<!-- <a href="#blog" class="scroll"><span class="icon-design-graphic-tablet-streamline-tablet"></span></a> -->
+                <ul class="header-social-icons"> 
+                   <!--  <li><a href="#0" target="_blank" title="Facebook"> <i class="fab fa-facebook-f"></i> </a></li>
+                    <li><a href="#0" target="_blank" title="Twitter"> <i class="fab fa-twitter"></i> </a></li>
+                    <li><a href="#0" target="_blank" title="Instagram"> <i class="fab fa-instagram"></i></a></li> 
+                    <li><a href="#0" target="_blank" title="Behance"> <i class="fab fa-behance"></i> </a></li> -->
+                </ul> <!-- <h6 class="copy-txt">Copyright © 2018 Resume</h6> --> </nav> <!-- Nav ends!--> </div>
+        </header> 
+        <!-- Header ends! --> 
+    </div>
+    <!--Left side wrap-->
+    <!--Right side wrap-->
+    <div class="right-side-area">
+        <!-- Start home -->
+		<div id="home" class="home-area wave-area">
+        <div class="water-effect"></div> <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-center"> 
+            <!--Title text--> <div class="col-12 col-md-8 col-lg-8 home-content text-center">
+            <!-- Super heading --> <!-- <h5 class="greet">Hello, my name is <strong>Sadiq Siddiqui</strong></h5>  -->
+            <!-- Super heading ends!--> <!-- heading text --> <h1 class="skills cd-headline letters scale"> 
+			<span>بطاقة ذوي الاحتياجات الخاصة</span> 
+			<!-- <span class="cd-words-wrapper">
+			<b class="is-visible">Developer</b>
+			<b>Designer</b>
+			<b>Freelancer</b>
+			</span>  -->
+			</h1> <!-- heading text ends!--> <!-- description --> 
+            <p class="description">لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+
+أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
+
+أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات </p> <!-- description ends!--> <!-- button--> 
+            <!-- <div class="button-area">
+                <a class="btn scroll" href="#portfolio">Portfolio</a> 
+                <a class="btn scroll button-scheme" href="#quote">Hire me</a> 
+            </div> -->
+            <!-- button ends! --> 
+            </div> <!--Title text ends!--> 
+        </div> 
+        </div> 
+        </div>
+        <!-- home ends! --> 
+        <!-- Start about -->
+        <div id="about" class="single-section about-area"> 
+            <div class="container">
+			<div class="row"> 
+                
+                <!-- about content -->
+					<div class="col-sm-12 col-lg-6">
+					<div class="about-content">
+					<!--Heading section--> 
+					<div class="section-heading">
+					<h2 class="section-title">رؤية الموقع</h2>
+					<h6 class="about-role">نسعى لتقديم خدمة أفضل</h6>
+					</div> <!--Heading section ends!--> <!--Describtion-->
+					<p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات</p>
+					<!--Describtion ends!-->
+					</div>
+					</div> 
+                <!-- about content ends! --> 
+				<!-- About image -->
+                <div class="col-sm-12 col-lg-6">
+                <div class="about-img"> 
+                    <img src="images/about-image.png" alt=""/> </div> 
+                </div>
+                <!-- About image ends! -->
+            </div> 
+        </div>
+        <!--services-->
+        <div id="services" class="single-section services-area parallax_img">
+            <div class="container">
+                <div class="row"> 
+                    <div class="col-12"> <!--Heading section-->
+                        <div class="section-heading"> <h2 class="section-title">خدماتنا</h2> <p class="section-description">وريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور</p>
+                        </div> <!--Heading section ends!-->
+                    </div> 
+                </div> 
+                <div class="row"> <!--services item--> 
+                    <div class="col-lg-4 col-sm-6"> 
+                        <div class="single-service"> <!--icon--> 
+                            <span class="icon-display"></span> <!--icon ends!-->
+                            <div class="service-body"> 
+                                <h6 class="service-title">Web Design</h6> 
+                                <p class="service-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, facere voluptate. Quidem, facere voluptate. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--services item ends!--> <!--services item-->
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="single-service"> 
+                            <!--icon-->
+                            <span class="icon-phone"></span> 
+                            <!--icon ends!-->
+                            <div class="service-body">
+                                <h6 class="service-title">Responsive</h6>
+         <p class="service-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, facere voluptate. Quidem, facere voluptate. </p> 
+         </div>
+         </div>
+             </div> <!--services item ends!--> <!--services item-->
+                    <div class="col-lg-4 col-sm-6"> 
+                        <div class="single-service"> <!--icon--> 
+                            <span class="icon-pen"></span>
+                            <!--icon ends!-->
+                            <div class="service-body">
+                                <h6 class="service-title">Branding</h6>
+                                <p class="service-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, facere voluptate. Quidem, facere voluptate. </p> 
+                            </div> 
+                        </div> 
+                    </div>
+                    <!--services item ends!--> <!--services item-->
+                    <div class="col-lg-4 col-sm-6"> 
+                        <div class="single-service"> <!--icon-->
+                            <span class="icon-sound"></span> 
+                            <!--icon ends!--> 
+                            <div class="service-body"> 
+                                <h6 class="service-title">Marketing</h6>
+                                <p class="service-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, facere voluptate. Quidem, facere voluptate. </p> 
+                            </div>
+                        </div> 
+                    </div>
+                    <!--services item ends!--> <!--services item-->
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="single-service"> <!--icon--> 
+                            <span class="icon-camera"></span> 
+                            <!--icon ends!--> <div class="service-body"> 
+                            <h6 class="service-title">Photography</h6> 
+                            <p class="service-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, facere voluptate. Quidem, facere voluptate. </p>
+                            </div> 
+                        </div> 
+                    </div>
+                    <!--services item ends!--> <!--services item--> <div class="col-lg-4 col-sm-6"> 
+                    <div class="single-service">
+                        <!--icon-->
+                        <span class="icon-heart"></span>
+                        <!--icon ends!--> 
+                        <div class="service-body"> 
+                            <h6 class="service-title">Customer Support</h6> 
+                            <p class="service-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, facere voluptate. Quidem, facere voluptate. </p> 
+                        </div> 
+                    </div> 
+                    </div>
+                    <!--services item ends!-->
+                </div>
+            </div>
+        </div> 
+        <!--services ends!--> 
+        <!--portfolio-->
+        <!-- <div id="#portfolio" class="single-section silver-bg portfolio-area"> 
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="section-heading">
+                            <h2 class="section-title">Our Portfolio</h2>
+                            <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione! </p> 
+                        </div> 
+                    </div> --> <!--portfolio list--> 
+                    <!-- <div class="col-md-12 col-lg-12">
+                        <div class="works-filter-wrap">
+                            <div class="row">
+                                <ul class="col-lg-12 col-md-12 list-inline works-filter">
+                                    <li class="list-inline-item tab-active" data-filter="*">All</li>
+                                    <li class="list-inline-item" data-filter=".brand">Brand</li>
+                                    <li class="list-inline-item" data-filter=".design">Design</li> 
+                                    <li class="list-inline-item" data-filter=".photos">Photos</li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                        <div class="works-container row">
+                        <div class="col-lg-4 col-sm-6 works-item brand"> 
+                            <div class="item-overlay">
+                                <div class="category">Brand</div>
+                                <img src="images/portfolio-01.jpg" alt=""/>
+                                <div class="overlay-content">
+                                    <h6 class="overlay-title">Business Card</h6>
+                                    <div class="overlay-icons">
+                                        <a href="images/portfolio-01.jpg" data-lity>
+                                            <span class="icon-eye"></span> </a> 
+                                        <a href="#0"> <span class="icon-link"></span> </a>
+                                    </div> 
+                                </div>
+                            </div>
+                            </div> 
+                            <div class="col-lg-4 col-sm-6 works-item design">
+                                
+    <div class="item-overlay">
+        <div class="category">Design</div>
+        <img src="images/portfolio-02.jpg" alt=""/>
+        <div class="overlay-content"> 
+            <h6 class="overlay-title">Anime Art</h6> 
+            <div class="overlay-icons">
+                <a href="images/portfolio-02.jpg" data-lity>
+                    <span class="icon-eye"></span> </a>
+                <a href="#0"> <span class="icon-link"></span> </a>
+            </div> 
+        </div> </div> 
+                            </div>
+                            <div class="col-lg-4 col-sm-6 works-item photos">
+                                <div class="item-overlay">
+                                    <div class="category">Photos</div>
+                                    <img src="images/portfolio-03.jpg" alt=""/>
+                                    <div class="overlay-content">
+                                        <h6 class="overlay-title">Business Card</h6> 
+                                        <div class="overlay-icons"> 
+                                            <a href="images/portfolio-03.jpg" data-lity>
+                                                <span class="icon-eye"></span>
+                                            </a>
+                                            <a href="#0"> 
+                                                <span class="icon-link"></span>
+                                            </a> 
+                                        </div> 
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="col-lg-4 col-sm-6 works-item photos">
+                                <div class="item-overlay">
+                                    <div class="category">Photos</div> <img src="images/portfolio-04.jpg" alt=""/> 
+                                    <div class="overlay-content"> 
+                                        <h6 class="overlay-title">Business Card</h6> 
+                                        <div class="overlay-icons"> 
+                                            <a href="images/portfolio-04.jpg" data-lity>
+                                                <span class="icon-eye"></span> </a> 
+                                            <a href="#0"> <span class="icon-link"></span>  </a>
+                                        </div> 
+                                    </div> 
+                                </div>
+                            </div> 
+                            <div class="col-lg-4 col-sm-6 works-item brand">
+                                <div class="item-overlay">
+                                    <div class="category">Brand</div>
+                                    <img src="images/portfolio-05.jpg" alt=""/> 
+                                    <div class="overlay-content"> 
+                                        <h6 class="overlay-title">Business Card</h6>
+                                        <div class="overlay-icons">
+                                            <a href="images/portfolio-05.jpg" data-lity> <span class="icon-eye"></span> </a> 
+                                            <a href="#0"> <span class="icon-link"></span> </a> 
+                                        </div>
+                                    </div> 
+                                </div> 
+                            </div>
+                            <div class="col-lg-4 col-sm-6 works-item photos">
+                                <div class="item-overlay"> 
+                                    <div class="category">Photos</div>
+                                    <img src="images/portfolio-06.jpg" alt=""/>
+                                    <div class="overlay-content"> 
+                                        <h6 class="overlay-title">Business Card</h6> 
+                                        <div class="overlay-icons">
+                                        <a href="images/portfolio-06.jpg" data-lity> <span class="icon-eye"></span> </a>
+                                        <a href="#0"> <span class="icon-link"></span> </a>
+                                        </div>
+                                    </div> 
+                                </div> 
+                            </div>
+                        </div>
+                    </div>  -->
+                    <!--portfolio list ends!-->
+                <!-- </div>
+            </div>
+        </div> -->
+        <!--portfolio ends!-->
+        <!--Clients--> 
+
+
+        <!--Clients ends!-->
+        <!--blog-->
+        <div id="blog" class="single-section blog-area parallax_img">
+            <div class="container"> 
+                <div class="row"> 
+                    <div class="col-12">
+                        <div class="section-heading">
+                            <h2 class="section-title">المقالات</h2> 
+                            <p class="section-description">
+"لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور</p> 
+                        </div> 
+                    </div>
+                </div> 
+                <div class="row"> 
+                    <div class="col-12">
+                        <!--blog carousel--> 
+                        <div class="owl-carousel blog-carousel">
+                            <!--blog item--> 
+                            <div class="blog-item">
+                                <div class="category">News</div>
+                                <div class="img-item"> <img src="images/blog-01.jpg" alt=""/> </div> 
+                                <div class="blog-text"> 
+                                    <div class="text-title">
+                                        <div class="date">Aug 13, 2018</div>
+                                        <a href="#0"> <h3>عنوان المقالة</h3> </a>
+                                        <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+										أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد</p> 
+                                    </div> 
+                                </div>
+                            </div> 
+                            <!--blog item ends!--> <!--blog item--> 
+                            <div class="blog-item">
+                                <div class="category">News</div> 
+                                <div class="img-item"> 
+                                    <img src="images/blog-02.jpg" alt=""/> 
+                                </div> 
+                                <div class="blog-text">
+                                    <div class="text-title">
+                                        <div class="date">Aug 13, 2018</div>
+                                        <a href="#0"> <h3>عنوان المقالة</h3> </a> 
+										<p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+										أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد</p> 
+                                    </div>
+                                </div> 
+                            </div> 
+                            <!--blog item ends!--> <!--blog item--> 
+                            <div class="blog-item"> 
+                                <div class="category">News</div> 
+                                <div class="img-item"> 
+                                    <img src="images/blog-03.jpg" alt=""/>
+                                </div> <div class="blog-text"> 
+                                <div class="text-title"> 
+                                    <div class="date">Aug 13, 2018</div> 
+                                    <a href="#0"> <h3>عنوان المقالة</h3> </a>
+                                   <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
+										أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد</p> 
+                                </div> 
+                                </div>
+                            </div>
+                            <!--blog item ends!--> 
+                            <!--blog item--> 
+                            <div class="blog-item"> 
+                                <div class="category">Brands</div>
+                                <div class="img-item"> <img src="images/blog-04.jpg" alt=""/> </div>
+                                <div class="blog-text"> 
+                                <div class="text-title"> <div class="date">Aug 13, 2018</div> <a href="#0"> <h3>The benefits of a DevOps Approach</h3> </a> <p>Will be distracted by the readable content of a page when looking at its layout.</p> </div>
+                                </div>
+                            </div>
+                            <!--blog item ends!-->
+                        </div>
+                        <!--blog carousel--> 
+                    </div>
+                </div>
+            </div> 
+        </div>
+        
+        <!--blog ends!-->
+
+		
+        <div  id ="call" class="contact parallax_img"> 
+            <div class="container">
+                <div class="row">
+                    <!--Call us -->
+                    <div class="col-lg-8 col-sm-12 m-auto">
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-4 contact-info">
+                                <div class="icon-box"><span class="icon-phone"></span></div>
+                                <h3>Call Us</h3>
+                                <ul>
+                                    <li>(001) 8686 234 432</li>
+                                    <li>Office - (001) 2345 678 900</li>
+                                </ul> 
+                            </div> 
+                            <!--Email us-->
+                            <div class="col-12 col-md-6 col-lg-4 contact-info">
+                                <div class="icon-box">
+                                    <span class="icon-mail"></span>
+                                </div>
+                                <h3>Email Us</h3> 
+                                <ul> 
+                                    <li>Info@example.com</li>
+                                    <li>support@example.com</li> 
+                                </ul>
+                            </div> 
+                            <!--Address-->
+                            <div class="col-12 col-md-12 col-lg-4 contact-info">
+                                <div class="icon-box">
+                                    <span class="icon-location"></span>
+                                </div> 
+                                <h3>Address</h3> 
+                                <ul> 
+                                    <li>Elston TCLexington</li>
+                                    <li>Ave 549MD, London, UK</li> 
+                                </ul> 
+                            </div>
+                        </div> 
+                    </div> 
+                </div>
+            </div> 
+        </div> 
+        <!--footer-->
+        <footer class="single-section">
+            <div class="container">
+                <div class="row"> 
+                    <div class="col-md-12 col-sm-12 text-center text-center align-self-center"> 
+                        <ul class="footer-social"> 
+                            <li><a href="#0" target="_blank" title="Facebook"> <i class="fab fa-facebook-f"></i> </a></li> 
+                            <li><a href="#0" target="_blank" title="Twitter"> <i class="fab fa-twitter"></i> </a></li> 
+                            <li><a href="#0" target="_blank" title="Instagram"> <i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#0" target="_blank" title="Behance"> <i class="fab fa-behance"></i> </a></li> 
+                        </ul>
+                        <h6 class="copy-txt">Copyright © 2018 Resume.</h6>
+                    </div>
+                </div> 
+            </div> 
+        </footer> 
+        <!--footer ends!-->
+	
+
+
+	
+    </div> <!--Right side wrap ends!--> <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-3.3.1.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed --> <!-- Bootstrap JS --> 
+    <script src="js/bootstrap.js"></script> <!-- Wow js file --> 
+    <script src="js/wow.js"></script>
+    <!-- core custom js -->
+    <script src="js/headline.js"></script>
+    <!--isotope-->
+    <script src="js/isotope.js"></script>
+    <!--lity--> <script src="js/lity.js"></script> <!--carousel--> 
+    <script src="js/owl.carousel.js"></script> 
+    <!--countimator--> 
+    <script src="js/jquery.countimator.js"></script>
+    <!--water effect--> <script src="js/jquery.ripples.js"></script> 
+    <!--form validation--> 
+    <script src="js/jquery.validate.js"></script> 
+    <!--ajax form--> <script src="js/jquery.form.js"></script> 
+    <!--Sweet Alert--> <script src="js/sweetalert.js"></script>
+    <!--Whatsapp button--> <script src="js/whatsapp.js"></script>
+    <!-- core custom js --> <script src="js/custom.js"></script> </body> 
+<!-- Mirrored from demo.newtemplate.net/resume/template/side-menu-wave.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Oct 2018 17:24:18 GMT -->
+    
+</html>

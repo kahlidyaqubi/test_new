@@ -1,0 +1,42 @@
+body, h1, h2, h3, h4, h5, h6, .dropdown-menu, .select2-container--bootstrap .select2-selection, .select2-container--bootstrap .select2-search--dropdown .select2-search__field {
+    font-family: 'Cairo', sans-serif;
+}
+select.form-control{
+	padding-top:1px;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+	    word-wrap: break-word;
+    word-break: break-all;
+}
+.bootstrap-timepicker-widget table{
+	direction:ltr !important;
+}
+.checkbox-list>label.checkbox-inline:first-child, .checkbox>label, .form-horizontal .checkbox>label, .portlet.light .form .form-actions.left, .portlet.light .portlet-form .form-actions.left, .radio-list>label.radio-inline:first-child{
+    padding-right: 20px !important;
+}
+.table>tbody>tr.danger>td, .table>tbody>tr.danger>th, .table>tbody>tr>td.danger, .table>tbody>tr>th.danger, .table>tfoot>tr.danger>td, .table>tfoot>tr.danger>th, .table>tfoot>tr>td.danger, .table>tfoot>tr>th.danger, .table>thead>tr.danger>td, .table>thead>tr.danger>th, .table>thead>tr>td.danger, .table>thead>tr>th.danger{
+    background-color:darksalmon !important;
+}
+.table>tbody>tr.success>td, .table>tbody>tr.success>th, .table>tbody>tr>td.success, .table>tbody>tr>th.success, .table>tfoot>tr.success>td, .table>tfoot>tr.success>th, .table>tfoot>tr>td.success, .table>tfoot>tr>th.success, .table>thead>tr.success>td, .table>thead>tr.success>th, .table>thead>tr>td.success, .table>thead>tr>th.success{
+    background-color:aquamarine !important;
+}
+#tblAjax th{
+    padding-right:20px !important;
+}
+.pagination>li{margin:0px !important;padding:0px !important;margin-left:-1px !important;}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    border: solid 1px transparent !important;
+    background: none !important;
+}
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before{
+    text-indent:2px;text-align:center;
+}
+table.dataTable.no-footer, table.dataTable thead th, table.dataTable thead td {
+    border-bottom: none !important;
+}
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child{
+    padding-left:15px;
+}
+table.dataTable > tbody > tr.child ul{
+    width:100%;
+}

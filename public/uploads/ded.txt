@@ -1,0 +1,19 @@
+<?php
+$itemco=\App\Company::all()->first();
+?>
+<h6 style="margin-left:130px;font-size:18px;"  >{{$item->mopile}} - {{$item->phone}}</h6>
+
+{{$item->mopile}}
+{{$item->phone}}
+{{$item->title}}
+{{$item->welcom_word}}
+{{$item->welcom_clouse}}
+{{$item->add_compline_clouse}}
+{{$item->add_propusel_clouse}}
+{{$item->add_thanks_clouse}}
+{{$item->follw_compline_clouse}}
+{{$item->how_we}}
+{{$item->free_number}}
+{{$item->mail}}
+{{$item->address}}
+{{$item->fax}}
