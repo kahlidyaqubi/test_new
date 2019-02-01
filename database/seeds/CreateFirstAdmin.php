@@ -174,7 +174,22 @@ class CreateFirstAdmin extends Seeder
             'show' => 0,
             'url' => '/account/article/delete',
         ]);
-        
+        /********/
+        $link_id = DB::table('links')->insertGetId([
+            'title' => 'notifications',
+            'icon' => 'icon-diamond',//https://fontawesome.com/v4.7.0/icons/
+            'parent_id' => 0,
+            'show' => 1,
+            'url' => '',
+        ]);
+        $link2 = DB::table('links')->insertGetId([
+            'title' => 'notifications control',
+            'icon' => '',
+            'parent_id' => $link_id,
+            'show' => 1,
+            'url' => '/account/notifications',
+        ]);
+
 }
     
 }

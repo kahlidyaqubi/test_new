@@ -1,10 +1,10 @@
 <?php
 if (auth()->user()) {
-    if (auth()->user()->lang == 'en') {
+    if (auth()->user()->lang == 'en' || auth()->user()->lang == null) {
         $dir = "ltr";
         $lang = "en";
     } else {
-        App\User::find(auth()->user()->id)->update(['lang'=>'ar']);
+        App\User::find(auth()->user()->id)->update(['lang' => 'ar']);
         $dir = "rtl";
         $lang = "ar";
     }
@@ -39,7 +39,8 @@ if (auth()->user()) {
               type="text/css"/>
         <link href="{{asset('metronic-rtl/assets/global/plugins/bootstrap-switch/css/bootstrap-switch-rtl.min.css')}}"
               rel="stylesheet" type="text/css"/>
-        <link href="{{asset('metronic-rtl/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css')}}" rel="stylesheet"
+        <link href="{{asset('metronic-rtl/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css')}}"
+              rel="stylesheet"
               type="text/css"/>
         <!-- END GLOBAL MANDATORY STYLES -->
         <!-- BEGIN THEME GLOBAL STYLES -->
@@ -159,6 +160,41 @@ if (auth()->user()) {
 
             </ul>
             <ul class="nav navbar-nav pull-right">
+                <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                    <?php
+                    $count = count(auth()->user()->notifications()->whereNull('read_at')->get()->toArray());
+                    $items = auth()->user()->notifications()->whereNull('read_at')->orderBy('id', 'desc')->take(10)->get();
+                    ?>
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                       data-close-others="true">
+                        <i class="icon-bell"></i>
+                        <span class="badge badge-default" id="num_notif"> {{$count}} </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="external">
+                            <h3>
+                                <span class="bold">الإشعارات</span> الغير مقروءة</h3>
+                            <a href="/account/notifications">عرض الجميع</a>
+                        </li>
+                        <li>
+                            <ul class="dropdown-menu-list scroller" id="notif" style="height: 250px;" data-handle-color="#637283">
+                                @foreach($items as $a)
+                                    <li>
+                                        <a href="{{$a->link}}">
+                                            <span class="time">{{$a->created_at->format('m/d/Y')}}</span>
+                                            <span class="details"
+                                                  style="display:block; max-width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                        <span class="label label-sm label-icon label-success">
+                                                           {{$a->type}}</i> </span>
+                                                      {{$a->title}}
+                                            </span>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
                 <li class="dropdown dropdown-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                        data-close-others="true">
@@ -189,7 +225,7 @@ if (auth()->user()) {
                         </li>
                         <li>
                             <a href="/account/account/profile/{{Auth::user()->account->id}}">
-                                <i class="icon-lock"></i>  {{trans('my-group.edit profile')}} </a>
+                                <i class="icon-lock"></i> {{trans('my-group.edit profile')}} </a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}"
@@ -330,7 +366,8 @@ if (auth()->user()) {
                 {{trans('my-group.do you sure to continue?')}}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{trans('my-group.close')}}</button>
+                <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">{{trans('my-group.close')}}</button>
                 <a href="#" class="btn btn-danger">{{trans('my-group.yes, sure')}}</a>
             </div>
         </div>
@@ -391,6 +428,38 @@ if (auth()->user()) {
             $("#Confirmserv .btn-danger").attr("href", $(this).attr("href"));
             return false;
         });
+    });
+</script>
+<script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+<script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('80aa60745d8088197153', {
+        cluster: 'ap2',
+        forceTLS: true
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    var user_id = '{{auth()->user()->id}}';
+    channel.bind('my-event', function(data) {
+        //alert(JSON.stringify(data));
+         if(data.user_id == user_id) {
+             var li = document.createElement("li");
+             li.innerHTML = "<a href='" + data.link + "'> <span class='time'>" + data.date + "</span>  " +
+                 "<span class='details' style='display:block; max-width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'> " +
+                 "<span class='label label-sm label-icon label-success'>" + data.type +"</i> " +
+                 "</span> " + data.title + " </span> </a>";
+
+             document.getElementById("notif").appendChild(li);
+             var num_notif = document.getElementById("num_notif");
+             num_notif.innerHTML = "";
+             num_notif.innerHTML ="<span>" + data.num_notif + "</span>";
+
+             var audio = new Audio('audio/unsure.mp3');
+             audio.play();
+         }
     });
 </script>
 @yield("js")

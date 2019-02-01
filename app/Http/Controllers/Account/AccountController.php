@@ -19,8 +19,8 @@ class AccountController extends BaseController
 {
     public function index(Request $request)
     {
-        $q = $request["q"]??"";
-        $items = Account::join('users', 'users.id', '=', 'accounts.user_id')->select('accounts.id','accounts.user_id','users.name','accounts.full_name','accounts.mobile','users.email')->whereRaw("true");
+        $q = $request["q"] ?? "";
+        $items = Account::join('users', 'users.id', '=', 'accounts.user_id')->select('accounts.id', 'accounts.user_id', 'users.name', 'accounts.full_name', 'accounts.mobile', 'users.email')->whereRaw("true");
         if ($items == null) {
             session::flash('msg', 'w:نأسف لا يوجد بيانات لعرضها');
             return redirect('/account/account');
@@ -28,16 +28,16 @@ class AccountController extends BaseController
         if ($q)
             $items->whereRaw("(full_name like ? or users.email like ? or mobile like ? or users.name like ? )"
                 , ["%$q%", "%$q%", "%$q%", "%$q%"]);
-      
+
 
         if ($request['theaction'] == 'excel') {
             $items = $items->get();
             return Excel::download(new AccountsExport($items), 'accounts.xlsx');
-        } elseif ($request['theaction'] == 'print'){
+        } elseif ($request['theaction'] == 'print') {
             $items = $items->get();
             $pdf = PDF::loadView("account.account.printall", compact('items'));
             return $pdf->stream('document.pdf');
-        }else{
+        } else {
             $items = $items->orderBy("full_name")->paginate(5)->appends([
                 "q" => $q]);
             return view("account.account.index", compact('items'));
@@ -66,17 +66,25 @@ class AccountController extends BaseController
             Session::flash("msg", "e:الرجاء ادخال كلمة المرور");
             return redirect("/account/account/create")->withInput();
         }
-        $user= User::create([
+        $user = User::create([
             'name' => $request["name"],
             'email' => $request["email"],
             'password' => bcrypt($password),
-            
+
         ]);
         $user->sendEmailVerificationNotification();
-        $user_id=$user->id;
+        $user_id = $user->id;
         $request["user_id"] = $user_id;
         $theid = Account::create($request->all())->id;
-         Session::flash("msg", "تمت عملية الاضافة بنجاح");
+
+        $users_ids = User::pluck('id')->toArray();
+        for ($i = 0; $i < count($users_ids); $i++) {
+            NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'إضافة', 'title' => 'تم إضافة حساب جديد', 'link' => '/account/account/']);
+
+        }
+
+
+        Session::flash("msg", "تمت عملية الاضافة بنجاح");
         return redirect("/account/account/permission/$theid");
     }
 
@@ -89,15 +97,15 @@ class AccountController extends BaseController
         }
         return view("account.account.edit", compact("item"));
     }
-    
+
     public function update(AccountRequest $request, $id)
     {
-		$item = Account::find($id);
+        $item = Account::find($id);
         if ($item == NULL) {
             Session::flash("msg", "e:الرجاء التاكد من الرابط المطلوب");
             return redirect("/account/account");
         }
-		
+
         $isExists = User::where("email", $request["email"])->where("id", "!=", $item->user->id)->count();
         if ($isExists) {
             Session::flash("msg", "e:القيمة المدخلة موجودة مسبقا");
@@ -108,7 +116,7 @@ class AccountController extends BaseController
             Session::flash("msg", "e:القيمة المدخلة موجودة مسبقا");
             return redirect("/account/account/$id/edit");
         }
-        
+
         $user = User::find($item->user_id);
         if ($request["password"] != "") {
             $user->password = bcrypt($request["password"]);
@@ -118,59 +126,69 @@ class AccountController extends BaseController
         $user->save();
 
         $item->update($request->all());
+
+        $users_ids = User::pluck('id')->toArray();
+        for ($i = 0; $i < count($users_ids); $i++) {
+            NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'تعديل', 'title' => "  $user->name تم تعديل حساب", 'link' => '/account/account/']);
+         }
         Session::flash("msg", "i:تمت عملية الحفظ بنجاح");
         return redirect("/account/account");
     }
 
     public function delete($id)
-    { 
-        $item =Account::find($id);
-		   if ($item == NULL){
-			 Session::flash("msg", "e:الرجاء التاكد من الرابط المطلوب");
-                return redirect("/account/account");
-		    }
-		   if(Auth::user()->account->id == $item->id ){
-                Session::flash("msg", "e:لا يمكن لصاحب الحساب حذف نفسه");
-                return redirect("/account/account");
-            }
-           if ( $item->id==1 ) {
-                Session::flash("msg", "e:لا يمكن حذف أول حساب في النظام");
-                return redirect("/account/account");
-            }
-           else {
-                $item = Account::find($id);
-                $aoldimg = $item->getAttribute('image');
+    {
+        $item = Account::find($id);
+        if ($item == NULL) {
+            Session::flash("msg", "e:الرجاء التاكد من الرابط المطلوب");
+            return redirect("/account/account");
+        }
+        if (Auth::user()->account->id == $item->id) {
+            Session::flash("msg", "e:لا يمكن لصاحب الحساب حذف نفسه");
+            return redirect("/account/account");
+        }
+        if ($item->id == 1) {
+            Session::flash("msg", "e:لا يمكن حذف أول حساب في النظام");
+            return redirect("/account/account");
+        } else {
+            $item = Account::find($id);
+            $aoldimg = $item->getAttribute('image');
             $mypath = public_path() . '/images/' . $item['id'] . '/';
             if (file_exists($mypath . $aoldimg) && $aoldimg != null) {
                 unlink($mypath . $aoldimg);
             }
-                
-                
-                
-                $accounlin = DB::table('account_link')->whereIn('account_id', [$item->id])->pluck('id');
-                if (count($accounlin) > 0)
-                    DB::table('account_link')->whereIn('id', $accounlin)->delete();
-                    $theuser = $item->user;
-                    $item->delete();
-				
-				$theuser->delete();
-                Session::flash("msg", "تم حذف حساب بنجاح");
-                return redirect("/account/account");
+
+
+            $accounlin = DB::table('account_link')->whereIn('account_id', [$item->id])->pluck('id');
+            if (count($accounlin) > 0)
+                DB::table('account_link')->whereIn('id', $accounlin)->delete();
+            $theuser = $item->user;
+
+
+            $users_ids = User::pluck('id')->toArray();
+            for ($i = 0; $i < count($users_ids); $i++) {
+                NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'حذف', 'title' => "  $theuser->name تم حذف حساب", 'link' => '/account/account/']);
             }
 
-     }
+            $item->delete();
+            $theuser->delete();
+            Session::flash("msg", "تم حذف حساب بنجاح");
+            return redirect("/account/account");
+        }
+
+    }
+
     public function deletegroup(Request $request)
     {
-        if($request->ids=='')
-            Session::flash("msg","e:لم يتم تحديد أي عنصر");
+        if ($request->ids == '')
+            Session::flash("msg", "e:لم يتم تحديد أي عنصر");
         else
-            Session::flash("msg","تمت عملية الحذف بنجاح");
+            Session::flash("msg", "تمت عملية الحذف بنجاح");
 
-        $items = preg_split('/,/',$request->ids);
-		if (($key = array_search('1', $items)) !== false) {
-             unset($items[$key]);
-           }
-        foreach(Account::find($items) as $item){
+        $items = preg_split('/,/', $request->ids);
+        if (($key = array_search('1', $items)) !== false) {
+            unset($items[$key]);
+        }
+        foreach (Account::find($items) as $item) {
             $aoldimg = $item->getAttribute('image');
             $mypath = public_path() . '/images/' . $item['id'] . '/';
             if (file_exists($mypath . $aoldimg) && $aoldimg != null) {
@@ -178,17 +196,22 @@ class AccountController extends BaseController
             }
             $accounlin = DB::table('account_link')->whereIn('account_id', [$item->id])->pluck('id');
             if (count($accounlin) > 0)
-            DB::table('account_link')->whereIn('id', $accounlin)->delete();
-            
+                DB::table('account_link')->whereIn('id', $accounlin)->delete();
+
+            $users_ids = User::pluck('id')->toArray();
             $theuser = $item->user;
+            for ($i = 0; $i < count($users_ids); $i++) {
+                NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'حذف', 'title' => "  $theuser->name تم حذف حساب", 'link' => '/account/account/']);
+            }
+
+
             $theuser->delete();
-            
-        }
-		;
+
+        };
         Account::destroy($items);
         return redirect("/account/account");
     }
-   
+
 
     public function permission($id)
     {

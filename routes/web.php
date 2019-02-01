@@ -11,15 +11,11 @@
 |
 */
 
-Route::resource("/posts","PostController");
-Route::resource("/comment","CommentController");
-
-Route::get('/first_pusher','TestController@index');
-Route::get('/send','TestController@send');
     Route::get('/', function () {
     return view('welcome');
 });
-    Route::get('/guzzele','GuzzelExampleController@index');
+
+Route::get('/guzzele','GuzzelExampleController@index');
 
 Route::get('/noaccses', function () {
     return view('welcome');
@@ -58,6 +54,8 @@ Route::get('/account/article/active/{id}','Account\ArticleController@active');
 Route::get('/account/article/deletegrope','Account\ArticleController@deletegroup');
 Route::resource("/account/article","Account\ArticleController");
 Route::get('/account/article/delete/{id}','Account\ArticleController@delete');
+//ادارة الاشعارت
+Route::resource("/account/notifications/","Account\NotificationController");
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 // Authentication Routes...
 /*

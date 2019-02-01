@@ -36,4 +36,6 @@ return array (
   'edit account' => 'تعديل حساب',
   'delete account' => 'حذف حسابات',
   'permission account' => 'صلاحية حساب',
+    'notifications control'=>'عرض الإشعارات',
+    'notifications'=>'الإشعارات'
 );

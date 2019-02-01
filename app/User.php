@@ -31,7 +31,10 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password', 'remember_token',
     ];
-
+    public function notifications()
+    {
+        return $this->hasMany('App\Notification');
+    }
     function account(){
         return $this->belongsTo('App\Account','id','user_id');
     }

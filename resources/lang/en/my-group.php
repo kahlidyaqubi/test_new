@@ -36,4 +36,6 @@ return array (
   'delete account' => 'delete account',
   'edit account' => 'edit account',
   'permission account' => 'permission account',
+    'notifications control'=>'notifications control',
+    'notifications'=>'notifications'
 );
