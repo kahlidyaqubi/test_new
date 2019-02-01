@@ -79,7 +79,7 @@
             @yield('content')
         </main>
     </div>
-    <!---موديل الدخول---!>
+    <!---موديل الدخول--->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <!--*** modal-dialog ****-->
                         <div class="modal-dialog" role="document" style="text-align:right">
@@ -103,7 +103,7 @@
 
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-form-label" style="color: #4C6788">الايميل</label>
+                                            <label class="col-form-label" style="color: #4C6788">البريد الإلكتروني أو إسم المستخدم</label>
                                             <input type="email" name="email" class="form-control" style="direction: rtl" placeholder="الايميل">
                                         </div>
                                         <div class="form-group">
