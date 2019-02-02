@@ -21,7 +21,7 @@ class AuthController extends Controller
      public function ajaxlogin(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|string|email',
+            'email' => 'required|string',
             'password' => 'required|string',
             'remember_me' => 'boolean'
         ]);
@@ -29,7 +29,11 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->messages(), 200);
         }
-        if (auth()->attempt(['email' => request('email'), 'password' => request('password')], request('remember_me'))) {
+        $the_user = User::where('name','=',request('email'))->first();
+        if($the_user){
+            $request['email']=$the_user->email;
+        }
+        if (auth()->attempt(['email' => $request['email'], 'password' => request('password')], request('remember_me'))) {
             $user = User::where('email', request('email'))->first();
             return '/account';
         } else {

@@ -13,6 +13,7 @@ return [
     */
 
     'accepted'             => 'يجب قبول :attribute',
+    'without_spaces' =>'يجب أن لا يكون هناك مسافات في :attribute',
     'active_url'           => ':attribute لا يُمثّل رابطًا صحيحًا',
     'after'                => 'يجب على :attribute أن يكون تاريخًا لاحقًا للتاريخ :date.',
     'after_or_equal'       => ':attribute يجب أن يكون تاريخاً لاحقاً أو مطابقاً للتاريخ :date.',
@@ -207,6 +208,7 @@ return [
         'category_id'=> 'فئة الشكوى',
         'id'=> 'الرقم',
         'sent_type'=>'طريقة الإرسال',
-        'mopile' => 'رقم الهاتف'
+        'mopile' => 'رقم الهاتف',
+
     ],
 ];
