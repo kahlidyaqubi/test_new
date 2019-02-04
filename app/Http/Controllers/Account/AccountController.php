@@ -11,7 +11,6 @@ use App\Account;
 use App\User;
 use App\Http\Requests\AccountRequest;
 use DB;
-use App\Imports\CitizenExport;
 use Maatwebsite\Excel\Facades\Excel;
 use  PDF;
 
