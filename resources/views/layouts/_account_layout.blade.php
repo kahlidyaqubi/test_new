@@ -443,9 +443,9 @@ if (auth()->user()) {
 
     var channel = pusher.subscribe('my-channel');
     var user_id = '{{auth()->user()->id}}';
-    channel.bind('my-event', function(data) {
+    channel.bind(user_id, function(data) {
         //alert(JSON.stringify(data));
-         if(data.user_id == user_id) {
+        // if(data.user_id == user_id) {
              var li = document.createElement("li");
              li.innerHTML = "<a href='" + data.link + "'> <span class='time'>" + data.date + "</span>  " +
                  "<span class='details' style='display:block; max-width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'> " +
@@ -459,7 +459,7 @@ if (auth()->user()) {
 
              var audio = new Audio('audio/unsure.mp3');
              audio.play();
-         }
+        // }
     });
 </script>
 @yield("js")

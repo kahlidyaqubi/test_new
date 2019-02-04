@@ -56,6 +56,7 @@ Route::resource("/account/article","Account\ArticleController");
 Route::get('/account/article/delete/{id}','Account\ArticleController@delete');
 //ادارة الاشعارت
 Route::resource("/account/notifications/","Account\NotificationController");
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 // Authentication Routes...
 /*

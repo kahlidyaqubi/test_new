@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Account;
 
 
+use App\Account;
 use App\Notification;
 use Illuminate\Http\Request;
 use Pusher\Pusher;
@@ -26,7 +27,7 @@ class NotificationController extends BaseController
     }
      static function insert($not_body){
          $a=Notification::create($not_body);
-         $items=auth()->user()->notifications()->whereNull('read_at')->get();
+         $items=Account::where('user_id','=',$a->user_id)->first()->user->notifications()->whereNull('read_at')->get();
          $options = array(
              'cluster' => 'ap2',
              'useTLS' => true
@@ -44,7 +45,7 @@ class NotificationController extends BaseController
          $data['date'] = $a->created_at->format('m/d/Y');
          $data['link'] = $a->link;
          $data['num_notif'] = count($items->toArray());
-         $pusher->trigger('my-channel', 'my-event', $data);
+         $pusher->trigger('my-channel', $data['user_id'].'', $data);
      }
     public function store(Request $request)
     {
