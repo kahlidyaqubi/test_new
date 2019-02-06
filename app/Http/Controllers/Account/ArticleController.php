@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Account;
 
+use App\Account;
 use Illuminate\Http\Request;
 use Session;
 use App\Article;
@@ -40,6 +41,7 @@ class ArticleController extends BaseController
     public function index(Request $request)
     {
         $q = $request["q"]??"";
+        $category_id = $request["category_id"] ?? "";
         $items = Article::join('categories', 'categories.id', '=', 'articles.category_id')->select('articles.*')->whereRaw("true");
         if ($items == null) {
             session::flash('msg', 'w:نأسف لا يوجد بيانات لعرضها');
@@ -48,13 +50,57 @@ class ArticleController extends BaseController
         if ($q)
             $items->whereRaw("(title like ? or categories.name like ?)"
                 , ["%$q%","%$q%"]);
-      
+        if ($category_id)
+            $items->whereRaw("(category_id = ?)"
+                , [$category_id]);
 
         $items = $items->orderBy("articles.id",'desc')->paginate(12)->appends([
-            "q" => $q]);
-        return view("account.article.index", compact('items'));
+            "q" => $q , "category_id" => $category_id]);
+        $categories = Category::all();
+        return view("account.article.index", compact('items','categories'));
     }
+    public function articleincat(Request $request , $id)
+    {
+        $q = $request["q"]??"";
 
+        $item=Category::find($id);
+        $items = $item->articles()->join('categories', 'categories.id', '=', 'articles.category_id')->select('articles.*')->whereRaw("true");
+        if ($items == null) {
+            session::flash('msg', 'w:نأسف لا يوجد بيانات لعرضها');
+            return redirect('/account/article');
+        }
+        if ($q)
+            $items->whereRaw("(title like ? or categories.name like ?)"
+                , ["%$q%","%$q%"]);
+
+        $items = $items->orderBy("articles.id",'desc')->paginate(12)->appends([
+            "q" => $q ]);
+        return view("account.article.articleincat", compact('items','item'));
+    }
+    public function articleinacc(Request $request , $id)
+    {
+        $q = $request["q"]??"";
+
+        $category_id = $request["category_id"] ?? "";
+        $item=Account::find($id);
+        $items = $item->articles()->join('categories', 'categories.id', '=', 'articles.category_id')->select('articles.*')->whereRaw("true");
+        if ($items == null) {
+            session::flash('msg', 'w:نأسف لا يوجد بيانات لعرضها');
+            return redirect('/account/article');
+        }
+        if ($q)
+            $items->whereRaw("(title like ? or categories.name like ?)"
+                , ["%$q%","%$q%"]);
+        if ($category_id)
+            $items->whereRaw("(category_id = ?)"
+                , [$category_id]);
+
+        $items = $items->orderBy("articles.id",'desc')->paginate(12)->appends([
+            "q" => $q , "category_id" => $category_id]);
+
+        $categories = Category::all();
+        return view("account.article.articleinacc", compact('items','item','categories'));
+    }
     public function create()
     {
         $categories=Category::all();
@@ -65,6 +111,7 @@ class ArticleController extends BaseController
     {
 
         $request['publish']=1;
+        $request['account_id']=auth()->user()->account->id;
         $mycontect = $request->input('news');
         unset($request['news']);
         $id =Article::create($request->all())->id;

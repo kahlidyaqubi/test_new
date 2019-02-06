@@ -76,12 +76,14 @@
                                             class="fa fa-lock"></i></a>
                                 <a class="btn btn-xs btn-primary" title="تعديل" href="/account/account/{{$a->id}}/edit"><i
                                             class="fa fa-edit"></i></a>
+<a class="btn btn-xs btn-primary" title="أخباره" href="/account/article/articleinacc/{{$a->id}}">أخباره</a>
 
                             @if($a->id !=1 )
 
                                 <a class="btn btn-xs Confirm btn-danger" title="يمكن حذفه "
                                    href="/account/account/delete/{{$a->id}}"><i
                                             class="fa fa-trash"></i></a>
+
                             @endif
                         </td>
                     </tr>

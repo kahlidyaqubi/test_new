@@ -1,13 +1,13 @@
 @extends("layouts._account_layout")
 
-@section("title", "إدارة الفئات")
+@section("title", "إدارة الأقسام")
 @section("content")
     <span id="mybody">
         <div class="row">
               <form>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="q" value="{{request('q')}}"
-                               placeholder="ابحث في اسم الفئة"/>
+                               placeholder="ابحث في اسم القسم"/>
                     </div>
                  
                  
@@ -18,7 +18,7 @@
                   
 
                     <div class="col-sm-2">
-                        <a class="btn btn-success" href="/account/category/create">اضافــة فئة جديدة</a>
+                        <a class="btn btn-success" href="/account/category/create">اضافــة قسم جديد</a>
                     </div>
              </form>
             <div class="col-sm-1">
@@ -38,7 +38,7 @@
                     <tr>
                         <th width="3%">&#9745;</th>
                         <th style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">#</th>
-                        <th style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">اسم الفئة</th>
+                        <th style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">اسم القسم</th>
                         <th width="25%"></th>
                     </tr>
                 </thead>
@@ -58,6 +58,7 @@
                            <a class="btn btn-xs Confirm btn-danger" title="يمكن حذفه "
                                        href="/account/category/delete/{{$a->id}}"><i
                                                 class="fa fa-trash"></i></a>
+                             <a class="btn btn-xs btn-primary" title="أخباره" href="/account/article/articleincat/{{$a->id}}">أخباره</a>
 
                         </td>
                     </tr>

@@ -18,6 +18,7 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->string('news')->nullable();
             $table->string('imge')->nullable();
+            $table->integer('account_id');
             $table->integer('category_id');
             $table->text('summary');
             $table->boolean('active');

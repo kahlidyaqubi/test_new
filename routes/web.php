@@ -53,6 +53,8 @@ Route::get('/account/category/delete/{id}','Account\CategoryController@delete');
 Route::get('/account/article/active/{id}','Account\ArticleController@active');
 Route::get('/account/article/deletegrope','Account\ArticleController@deletegroup');
 Route::resource("/account/article","Account\ArticleController");
+Route::get('/account/article/articleincat/{id}','Account\ArticleController@articleincat');
+Route::get('/account/article/articleinacc/{id}','Account\ArticleController@articleinacc');
 Route::get('/account/article/delete/{id}','Account\ArticleController@delete');
 //ادارة الاشعارت
 Route::resource("/account/notifications/","Account\NotificationController");

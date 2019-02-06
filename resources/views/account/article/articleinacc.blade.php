@@ -1,6 +1,6 @@
 @extends("layouts._account_layout")
 
-@section("title", "إدارة الأخبار")
+@section("title", "عرض أخبار الناشر $item->full_name")
 @section("content")
     <span id="mybody">
         <div class="row">
@@ -9,9 +9,8 @@
                         <input type="text" class="form-control" name="q" value="{{request('q')}}"
                                placeholder="ابحث في اسم الخبر أو اسم القسم"/>
                     </div>
-                 
-                 <div class="col-sm-3">
-                        <select class="form-control" name="category_id" >
+              <div class="col-sm-3">
+                        <select class="form-control" name="category_id">
                             <option value="">جميع الأقسام</option>
                             @foreach($categories as $category)
                                 <option value="{{$category->id}}"
@@ -19,15 +18,10 @@
                             @endforeach
                          </select>
                     </div>
-              
                     <div class="col-sm-1">
                         <input type="submit" style="width:70px;" value="بحث" class="btn btn-primary"/>
                     </div>
-                  
 
-                    <div class="col-sm-2">
-                        <a class="btn btn-success" href="/account/article/create">اضافــة خبر جديد</a>
-                    </div>
              </form>
             <div class="col-sm-1">
                     <form method="get" action="/account/article/deletegrope">

@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="category_id" class="col-sm-2 col-form-label">فئة الخبر</label>
+            <label for="category_id" class="col-sm-2 col-form-label">قسم الخبر</label>
             <div class="col-sm-5">
                 <select class="form-control" name="category_id">
                     <option value="">اختر</option>

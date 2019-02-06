@@ -205,7 +205,7 @@ return [
         'response'=> 'الرد',
 		'mail' => 'البريد',
         'project_id' => 'المشروع',
-        'category_id'=> 'فئة الشكوى',
+        'category_id'=> 'القسم',
         'id'=> 'الرقم',
         'sent_type'=>'طريقة الإرسال',
         'mopile' => 'رقم الهاتف',

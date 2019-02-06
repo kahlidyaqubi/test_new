@@ -17,8 +17,9 @@ class HomeController extends BaseController
     public function dashboard()
     {
         $item = auth()->user()->account;
+        $articles = $item->articles;
         
-      return view("account.home.dashboard",compact('item'));
+      return view("account.home.dashboard",compact('item','articles'));
     }
     public function profile($id)
     {

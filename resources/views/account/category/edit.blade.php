@@ -1,6 +1,6 @@
 @extends("layouts._account_layout")
 
-@section("title", " تعديل فئة $item->name")
+@section("title", " تعديل قسم $item->name")
 
 
 @section("content")
@@ -8,7 +8,7 @@
         {{csrf_field()}}
         @method('patch')
         <div class="form-group row">
-            <label for="name" class="col-sm-2 col-form-label">اسم الفئة</label>
+            <label for="name" class="col-sm-2 col-form-label">اسم القسم</label>
             <div class="col-sm-5">
                 <input type="text" autofocus class="form-control" value="{{$item["name"]}}" id="name"
                        name="name">

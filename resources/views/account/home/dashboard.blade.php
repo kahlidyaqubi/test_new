@@ -58,46 +58,48 @@
                             <!--end row-->
 
                             @if(1==1)
-                            <div class="tabbable-line tabbable-custom-profile">
+                                <div class="tabbable-line tabbable-custom-profile">
 
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="tab_1_11">
-                                        <div class="portlet-body">
-                                            <table class="table table-striped table-bordered table-advance table-hover">
-                                                <thead>
-                                                <tr>
-                                                    <th>
-                                                        <i class="fa fa-briefcase"></i>{{trans('my-group.article')}}
-                                                    </th>
-                                                    <th class="hidden-xs">
-                                                        <i class="fa fa-question"></i>{{trans('my-group.title')}}
-                                                    </th>
-                                                    <th class="hidden-xs">
-                                                        <i class="fa fa-bookmark"></i>{{trans('my-group.date')}}
-                                                    </th>
-                                                    <th></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                                                        <a href="#"> </a>
-                                                    </td>
-                                                    <td class="hidden-xs"></td>
-                                                    <td class="hidden-xs"></td>
-                                                    <td>
-                                                        <a class="btn btn-sm grey-salsa btn-outline"
-                                                           href="#"> {{trans('my-group.show')}}</a>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab_1_11">
+                                            <div class="portlet-body">
+                                                <table class="table table-striped table-bordered table-advance table-hover">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>
+                                                            <i class="fa fa-briefcase"></i>{{trans('my-group.article')}}
+                                                        </th>
+                                                        <th class="hidden-xs">
+                                                            <i class="fa fa-question"></i>{{trans('my-group.category')}}
+                                                        </th>
+                                                        <th class="hidden-xs">
+                                                            <i class="fa fa-bookmark"></i>{{trans('my-group.date')}}
+                                                        </th>
+                                                        <th></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($articles as $article)
+                                                        <tr>
+                                                            <td style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                                                <a href="#"> {{$article->title}} </a>
+                                                            </td>
+                                                            <td class="hidden-xs">{{$article->category->name}}</td>
+                                                            <td class="hidden-xs">{{$article->created_at->format('m/d/Y')}}</td>
+                                                            <td>
+                                                                <a class="btn btn-sm grey-salsa btn-outline"
+                                                                   href="#"> {{trans('my-group.show')}}</a>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <!--tab-pane-->
+                                        <!--tab-pane-->
 
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                         @else
                             <br><br>
