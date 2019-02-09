@@ -37,5 +37,13 @@ return array (
   'edit account' => 'edit account',
   'permission account' => 'permission account',
     'notifications control'=>'notifications control',
-    'notifications'=>'notifications'
+    'notifications'=>'notifications',
+    'comments' =>'comments',
+    'comment control' =>'comment control',
+    'delete comment' =>'delete comment',
+    'change password'=>'change password',
+    'currnt password'=>'currnt password',
+    'new password'=>'new password',
+    'confirm password'=>'confirm password',
+    'cancel'=>'cancel',
 );

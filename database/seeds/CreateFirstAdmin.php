@@ -103,7 +103,7 @@ class CreateFirstAdmin extends Seeder
         /************************************/
         $link_id = DB::table('links')->insertGetId([
             'title' => 'categories',
-            'icon' => 'icon-diamond',//https://fontawesome.com/v4.7.0/icons/
+            'icon' => 'icon-diamond',
             'parent_id' => 0,
             'show' => 1,
             'url' => '',
@@ -136,6 +136,28 @@ class CreateFirstAdmin extends Seeder
             'parent_id' => $link_id,
             'show' => 0,
             'url' => '/account/category/delete',
+        ]);
+        /************************************/
+        $link_id = DB::table('links')->insertGetId([
+            'title' => 'comments',
+            'icon' => 'icon-diamond',
+            'parent_id' => 0,
+            'show' => 1,
+            'url' => '',
+        ]);
+        $link2 = DB::table('links')->insertGetId([
+            'title' => 'comment control',
+            'icon' => '',
+            'parent_id' => $link_id,
+            'show' => 1,
+            'url' => '/account/comment',
+        ]);
+        $link5 = DB::table('links')->insertGetId([
+            'title' => 'delete comment',
+            'icon' => '',
+            'parent_id' => $link_id,
+            'show' => 0,
+            'url' => '/account/comment/delete',
         ]);
         /********/
         $link_id = DB::table('links')->insertGetId([

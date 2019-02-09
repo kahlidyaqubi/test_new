@@ -1,30 +1,28 @@
 @extends("layouts._account_layout")
 
-@section("title", "عرض أخبار الناشر $item->full_name")
+@section("title", "إدارة التعليقات")
 @section("content")
     <span id="mybody">
         <div class="row">
               <form>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" name="q" value="{{request('q')}}"
-                               placeholder="ابحث في اسم الخبر أو اسم القسم"/>
+                               placeholder="ابحث في التعليقات"/>
                     </div>
-              <div class="col-sm-3">
-                        <select class="form-control" name="category_id">
-                            <option value="">جميع الأقسام</option>
-                            @foreach($categories as $category)
-                                <option value="{{$category->id}}"
-                                        @if(request('category_id')== $category->id)selected @endif>{{$category->name}}</option>
-                            @endforeach
-                         </select>
-                    </div>
+<div class="col-sm-3">
+                <select name="status" class="form-control">
+                    <option value="">جميع التعليقات</option>
+                    <option {{request('status')=="1"?"selected":""}} value="1">المسموح بها</option>
+                    <option {{request('status')=="2"?"selected":""}} value="2">الغير مسموح</option>
+                </select>
+            </div>
+              
                     <div class="col-sm-1">
                         <input type="submit" style="width:70px;" value="بحث" class="btn btn-primary"/>
                     </div>
-
              </form>
             <div class="col-sm-1">
-                    <form method="get" action="/account/article/deletegrope">
+                    <form method="get" action="/account/comment/deletegrope">
                         @csrf
                         <input  type="hidden" name="ids" v-model="checkedNames">
                         <input v-if="checkedNames!=''" type="submit" class="btn btn-danger" value="حذف المحدد">
@@ -40,9 +38,8 @@
                     <tr>
                         <th width="3%">&#9745;</th>
                         <th style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">#</th>
-                        <th style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">عنوان الخبر</th>
-                        <th style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">القسم</th>
-                        <th style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">الناشر</th>
+                        <th style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">التعليق</th>
+                        <th style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">الخبر</th>
                         <th style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">الحالة</th>
                         <th width="25%"></th>
                     </tr>
@@ -54,18 +51,14 @@
 						<input type="checkbox" value="{{$a->id}}" v-model="checkedNames">
 						</td>
                         <td style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{$a->id}}</td>
-                        <td style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{$a->title}}</td>
-                        <td style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{$a->category->name}}</td>
-                        <td style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{$a->account->full_name}}</td>
-                        <td ><input  class="cbActive" type="checkbox" {{$a->active==1?"checked":""}} value="{{$a->id}}"/>
+                        <td style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{$a->comment}}</td>
+                            <td style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><a href="#">{{$a->article->title}}</a></td>
+                        <td ><input  class="cbActive" type="checkbox" {{$a->status==1?"checked":""}} value="{{$a->id}}"/>
                         </td>
                         <td style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                                <a class="btn btn-xs btn-primary" title="تعديل" href="/account/article/{{$a->id}}/edit"><i
-                                            class="fa fa-edit"></i></a>
 
-<a class="btn btn-xs btn-primary" title="تعليقاته" href="/account/comment/commentinart/{{$a->id}}">تعليقاته</a>
                            <a class="btn btn-xs Confirm btn-danger" title="يمكن حذفه "
-                                       href="/account/article/delete/{{$a->id}}"><i
+                                       href="/account/comment/delete/{{$a->id}}"><i
                                                 class="fa fa-trash"></i></a>
 
                         </td>
@@ -99,12 +92,12 @@
             $(".cbActive").click(function () {
                 var id = $(this).val();
                 $.ajax({
-                    url:"/account/article/active/" + id,
+                    url:"/account/comment/active/" + id,
                     data:{_token:'{{ csrf_token() }}'},
                     error : function (jqXHR, textStatus, errorThrown) {
                         // User Not Logged In
                         // 401 Unauthorized Response
-                        window.location.href = "/account/article";
+                        window.location.href = "/account/comment";
                     },
                 });
             });

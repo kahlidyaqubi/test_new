@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Account;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Category;
 use App\User;
@@ -46,6 +47,12 @@ class CategoryController extends BaseController
             return redirect("/account/category/create")->withInput();
         }
         Category::create($request->all());
+        $users_ids = User::pluck('id')->toArray();
+        for ($i = 0; $i < count($users_ids); $i++) {
+            if (Auth::user()->account->links->contains(\App\Link::where('title', '=', 'notifications control')->first()->id))
+                NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'إضافة', 'title' => 'تم إضافة قسم إخباري', 'link' => '/account/category/']);
+
+        }
         Session::flash("msg", "تمت عملية الاضافة بنجاح");
         return redirect("/account/category/create");
     }
@@ -75,6 +82,13 @@ class CategoryController extends BaseController
         }
 
         $item->update($request->all());
+
+        $users_ids = User::pluck('id')->toArray();
+        for ($i = 0; $i < count($users_ids); $i++) {
+            if (Auth::user()->account->links->contains(\App\Link::where('title', '=', 'notifications control')->first()->id))
+                NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'تعديل', 'title' => 'تم تعديل قسم إخباري', 'link' => '/account/category/']);
+
+        }
         Session::flash("msg", "i:تمت عملية الحفظ بنجاح");
         return redirect("/account/category");
     }

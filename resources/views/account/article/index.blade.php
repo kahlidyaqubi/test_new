@@ -11,7 +11,7 @@
                     </div>
                  
                  <div class="col-sm-3">
-                        <select class="form-control" name="category_id" >
+                        <select class="form-control" name="category_id">
                             <option value="">جميع الأقسام</option>
                             @foreach($categories as $category)
                                 <option value="{{$category->id}}"
@@ -32,7 +32,7 @@
             <div class="col-sm-1">
                     <form method="get" action="/account/article/deletegrope">
                         @csrf
-                        <input  type="hidden" name="ids" v-model="checkedNames">
+                        <input type="hidden" name="ids" v-model="checkedNames">
                         <input v-if="checkedNames!=''" type="submit" class="btn btn-danger" value="حذف المحدد">
                     </form>
               </div>
@@ -63,15 +63,15 @@
                         <td style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{$a->title}}</td>
                         <td style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{$a->category->name}}</td>
                         <td style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{$a->account->full_name}}</td>
-                        <td ><input  class="cbActive" type="checkbox" {{$a->active==1?"checked":""}} value="{{$a->id}}"/>
+                        <td><input class="cbActive" type="checkbox" {{$a->active==1?"checked":""}} value="{{$a->id}}"/>
                         </td>
                         <td style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                                 <a class="btn btn-xs btn-primary" title="تعديل" href="/account/article/{{$a->id}}/edit"><i
                                             class="fa fa-edit"></i></a>
-
+<a class="btn btn-xs btn-primary" title="تعليقاته" href="/account/comment/commentinart/{{$a->id}}">تعليقاته</a>
                            <a class="btn btn-xs Confirm btn-danger" title="يمكن حذفه "
-                                       href="/account/article/delete/{{$a->id}}"><i
-                                                class="fa fa-trash"></i></a>
+                              href="/account/article/delete/{{$a->id}}"><i
+                                       class="fa fa-trash"></i></a>
 
                         </td>
                     </tr>
@@ -104,9 +104,9 @@
             $(".cbActive").click(function () {
                 var id = $(this).val();
                 $.ajax({
-                    url:"/account/article/active/" + id,
-                    data:{_token:'{{ csrf_token() }}'},
-                    error : function (jqXHR, textStatus, errorThrown) {
+                    url: "/account/article/active/" + id,
+                    data: {_token: '{{ csrf_token() }}'},
+                    error: function (jqXHR, textStatus, errorThrown) {
                         // User Not Logged In
                         // 401 Unauthorized Response
                         window.location.href = "/account/article";

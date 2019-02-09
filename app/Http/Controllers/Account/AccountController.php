@@ -78,7 +78,8 @@ class AccountController extends BaseController
 
         $users_ids = User::pluck('id')->toArray();
         for ($i = 0; $i < count($users_ids); $i++) {
-            NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'إضافة', 'title' => 'تم إضافة حساب جديد', 'link' => '/account/account/']);
+            if (Auth::user()->account->links->contains(\App\Link::where('title', '=', 'notifications control')->first()->id))
+                NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'إضافة', 'title' => 'تم إضافة حساب جديد', 'link' => '/account/account/']);
 
         }
 
@@ -128,8 +129,9 @@ class AccountController extends BaseController
 
         $users_ids = User::pluck('id')->toArray();
         for ($i = 0; $i < count($users_ids); $i++) {
-            NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'تعديل', 'title' => "  $user->name تم تعديل حساب", 'link' => '/account/account/']);
-         }
+            if (Auth::user()->account->links->contains(\App\Link::where('title', '=', 'notifications control')->first()->id))
+                NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'تعديل', 'title' => "  $user->name تم تعديل حساب", 'link' => '/account/account/']);
+        }
         Session::flash("msg", "i:تمت عملية الحفظ بنجاح");
         return redirect("/account/account");
     }
@@ -165,7 +167,8 @@ class AccountController extends BaseController
 
             $users_ids = User::pluck('id')->toArray();
             for ($i = 0; $i < count($users_ids); $i++) {
-                NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'حذف', 'title' => "  $theuser->name تم حذف حساب", 'link' => '/account/account/']);
+                if (Auth::user()->account->links->contains(\App\Link::where('title', '=', 'notifications control')->first()->id))
+                    NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'حذف', 'title' => "  $theuser->name تم حذف حساب", 'link' => '/account/account/']);
             }
 
             $item->delete();
@@ -200,7 +203,8 @@ class AccountController extends BaseController
             $users_ids = User::pluck('id')->toArray();
             $theuser = $item->user;
             for ($i = 0; $i < count($users_ids); $i++) {
-                NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'حذف', 'title' => "  $theuser->name تم حذف حساب", 'link' => '/account/account/']);
+                if (Auth::user()->account->links->contains(\App\Link::where('title', '=', 'notifications control')->first()->id))
+                    NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'حذف', 'title' => "  $theuser->name تم حذف حساب", 'link' => '/account/account/']);
             }
 
 

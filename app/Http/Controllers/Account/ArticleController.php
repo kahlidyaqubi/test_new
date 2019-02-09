@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Account;
 
 use App\Account;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Article;
 use App\Category;
@@ -136,6 +138,13 @@ class ArticleController extends BaseController
         $thenews->imge = $imge->getClientOriginalName();
         $thenews->save();
 
+        $users_ids = User::pluck('id')->toArray();
+        for ($i = 0; $i < count($users_ids); $i++) {
+            if (Auth::user()->account->links->contains(\App\Link::where('title', '=', 'notifications control')->first()->id))
+                NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'إضافة', 'title' => 'تم إضافة خبر جديد', 'link' => '/account/article/']);
+
+        }
+
         Session::flash("msg", "تمت عملية الاضافة بنجاح");
         return redirect("/account/article/create");
     }
@@ -196,6 +205,14 @@ class ArticleController extends BaseController
         Storage::disk('uploads')->put('/newsfile/' . $id . '/myfile.txt', $mycontect2);
         unset($request['news']);
         $item->update($request->all());
+
+        $users_ids = User::pluck('id')->toArray();
+        for ($i = 0; $i < count($users_ids); $i++) {
+            if (Auth::user()->account->links->contains(\App\Link::where('title', '=', 'notifications control')->first()->id))
+                NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'تعديل', 'title' => 'تم تعديل خبر', 'link' => '/account/article/']);
+
+        }
+
         Session::flash("msg", "i:تمت عملية الحفظ بنجاح");
         return redirect("/account/article");
     }

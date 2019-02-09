@@ -38,5 +38,13 @@ return array (
   'delete account' => 'حذف حسابات',
   'permission account' => 'صلاحية حساب',
     'notifications control'=>'عرض الإشعارات',
-    'notifications'=>'الإشعارات'
+    'notifications'=>'الإشعارات',
+    'comments' =>'التعليقات',
+    'comment control' =>'إدارة التعليقات',
+    'delete comment' =>'حذف تعليق',
+    'change password'=>'تغيير كلمة المرور',
+    'currnt password'=>'كلمة المرور الحالية',
+    'new password'=>'كلمة المرور الجديدة',
+    'confirm password'=>'تأكيد كلمة المرور',
+    'cancel'=>'إلغاء الأمر',
 );

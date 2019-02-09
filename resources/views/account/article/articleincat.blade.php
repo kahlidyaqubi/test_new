@@ -56,6 +56,7 @@
                                 <a class="btn btn-xs btn-primary" title="تعديل" href="/account/article/{{$a->id}}/edit"><i
                                             class="fa fa-edit"></i></a>
 
+<a class="btn btn-xs btn-primary" title="تعليقاته" href="/account/comment/commentinart/{{$a->id}}">تعليقاته</a>
                            <a class="btn btn-xs Confirm btn-danger" title="يمكن حذفه "
                               href="/account/article/delete/{{$a->id}}"><i
                                        class="fa fa-trash"></i></a>

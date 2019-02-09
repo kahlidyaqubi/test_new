@@ -58,7 +58,12 @@ Route::get('/account/article/articleinacc/{id}','Account\ArticleController@artic
 Route::get('/account/article/delete/{id}','Account\ArticleController@delete');
 //ادارة الاشعارت
 Route::resource("/account/notifications/","Account\NotificationController");
-
+//ادارة التعليقات
+Route::get('/account/comment/active/{id}','Account\CommentController@active');
+Route::get('/account/comment/deletegrope','Account\CommentController@deletegroup');
+Route::resource("/account/comment/","Account\CommentController");
+Route::get('/account/comment/delete/{id}','Account\CommentController@delete');
+Route::get('/account/comment/commentinart/{id}','Account\CommentController@commentinart');
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 // Authentication Routes...
 /*
