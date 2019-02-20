@@ -1,0 +1,1 @@
+<p>jkhkl<img src="http://127.0.0.1:8000/newsfile/6/images/70225.jpg" style="width: 600px;"><br></p>

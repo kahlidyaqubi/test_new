@@ -3,7 +3,7 @@ if (auth()->user()) {
     if (auth()->user()->lang == 'en' || auth()->user()->lang == null) {
         $dir = "ltr";
         $lang = "en";
-    } else {
+    } else {notif
         App\User::find(auth()->user()->id)->update(['lang' => 'ar']);
         $dir = "rtl";
         $lang = "ar";

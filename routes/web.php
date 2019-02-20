@@ -11,7 +11,7 @@
 |
 */
 
-    Route::get('/', function () {
+    Route::get('/welcom', function () {
     return view('welcome');
 });
 
@@ -48,6 +48,9 @@ Route::post('/account/account/permission/{id}','Account\AccountController@permis
 Route::get('/account/category/deletegrope','Account\CategoryController@deletegroup');
 Route::resource("/account/category","Account\CategoryController");
 Route::get('/account/category/delete/{id}','Account\CategoryController@delete');
+/////
+Route::resource("/account/category2","Account\Category2Controller");
+Route::resource("/account/category-axios","Account\CategoryAxiosController");
 //ادارة الأخبار
 
 Route::get('/account/article/active/{id}','Account\ArticleController@active');
@@ -65,36 +68,5 @@ Route::resource("/account/comment/","Account\CommentController");
 Route::get('/account/comment/delete/{id}','Account\CommentController@delete');
 Route::get('/account/comment/commentinart/{id}','Account\CommentController@commentinart');
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-// Authentication Routes...
-/*
-///لوجين ونسيت
-///
-Route::post('/account/login','AuthController@ajaxlogin');
-Route::post('/account/restpassord','AuthRestController@sendResetLinkEmail');
-
-Route::get('login', function () {
-    $itemco=\App\Company::all()->first();
-    return view('welcome',compact('itemco'));
-})->name('login');
-
-Route::get('logout', function () {
-    $itemco=\App\Company::all()->first();
-    return view('welcome',compact('itemco'));
-});
-
-Route::post('login', 'Auth\LoginController@login');
-Route::middleware('auth')->post('logout', 'Auth\LoginController@logout')->name('logout');
-
-// Registration Routes...
-Route::get('register',  function () {
-    $itemco=\App\Company::all()->first();
-    return view('welcome',compact('itemco'));
-})->name('register');
-Route::post('register', 'Auth\RegisterController@register');
-
-// Password Reset Routes...
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-*/
+//article
+Route::get('/','Article\ArticleController@index');
