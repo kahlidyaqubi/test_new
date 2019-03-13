@@ -119,6 +119,7 @@ class ArticleController extends BaseController
         $id =Article::create($request->all())->id;
         Storage::disk('uploads')->makeDirectory("/newsfile/$id/images");
 
+        if($request->hasFile('files'))
         foreach ($request->file('files') as $file) {
             $file->move(public_path() . '/newsfile/' . $id . '/images', $file->getClientOriginalName());
             Files::create(['file' => $file->getClientOriginalName(), 'news_id' => $id]);

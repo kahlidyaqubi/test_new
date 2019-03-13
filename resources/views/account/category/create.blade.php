@@ -14,6 +14,9 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        <div v-if="mainMessage" class="alert mt-3 alert-success">
+            @{{mainMessage}}
+        </div>
         <form method="post" id="formid" enctype="multipart/form-data" action="/account/category-axios">
             {{csrf_field()}}
             <div class="form-group row">
@@ -42,6 +45,7 @@
             data:{
                 name:'',
                 messges:[],
+                mainMessage:"",
             },
             methods: {
                 addcat:function() {
@@ -55,6 +59,8 @@
                             console.log(response);
                             if(response.data.type==0){
                                mythis.messges=response.data.data;
+                            }else{
+                                mythis.mainMessage = response.data.message;
                             }
 
 

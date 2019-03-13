@@ -34,10 +34,10 @@
                     </div>
              </form>
             <div class="col-sm-1">
-                    <form method="get" action="/account/account/deletegrope">
+                    <form method="get"  id="idForm" action="/account/account/deletegrope">
                         @csrf
                         <input type="hidden" name="ids" v-model="checkedNames">
-                        <input v-if="checkedNames!=''" type="submit" class="btn btn-danger" value="حذف المحدد">
+                        <a class="btn  Confirm btn-danger" href="javascript:document.forms['idForm'].submit();">حذف المحدد</a>
                     </form>
               </div>
         </div>

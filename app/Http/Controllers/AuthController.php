@@ -69,5 +69,33 @@ class AuthController extends Controller
             ]]);
         }
     }
+	
+	public function changePassword(Request $request)
+    {
+        $request->validate([
+            'password'=>'required',
+            'newpassword'=>'required|min:6|confirmed'
+        ]);
+
+        $user = \Auth::user();//logged in user
+        //dd($user);
+        if(Hash::check($request['password'], $user->password)){
+
+            //تغيير كلمة المرور
+            $user->password = Hash::make($request['newpassword']);
+            $user->save();
+            return response()->json([
+                'message' => 'Password Changed Successfully',
+                'status' => 1
+            ]);
+        }
+        else{
+            return response()->json([
+                'message' => 'e:Invalid Current Password',
+				'errors'=>['password'=>['Invalid Current Password']],
+                'status' => 0
+            ]);
+        }
+    }
     
 }

@@ -34,7 +34,7 @@ class CategoryAxiosController extends BaseController
 
         }
         Category::create($request->all());
-            return response()->json(['message'=>'succses','type'=>1,'data'=>$request->all()],200);
+            return response()->json(['message'=>'succses created new section','type'=>1,'data'=>$request->all()],200);
 
     }
 
