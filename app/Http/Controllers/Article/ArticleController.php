@@ -108,7 +108,7 @@ class ArticleController extends Controller
 
         $users_ids = User::pluck('id')->toArray();
         for ($i = 0; $i < count($users_ids); $i++) {
-            if (Auth::user()->account->links->contains(\App\Link::where('title', '=', 'notifications control')->first()->id))
+            if (User::find($users_ids[$i])->account->links->contains(\App\Link::where('title', '=', 'notifications control')->first()->id))
                 NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'إضافة', 'title' => 'تم إضافة تعليق جديد', 'link' => "/account/comment/commentinart/$id"]);
 
         }
