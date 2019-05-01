@@ -6,6 +6,7 @@ use App\Account;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Session;
 use App\Article;
 use App\Category;
@@ -16,9 +17,21 @@ use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends BaseController
 {
+
+    public function calender_show()
+    {
+        return view('account.article.calender');
+    }
+
+    public function editor_show()
+    {
+        return view('account.article.editor');
+    }
     public function __construct()
     {
         $this->middleware(['verified']);
+       $this->authorizeResource(Article::class);
+
     }
     public function active($id)
     {
@@ -108,7 +121,6 @@ class ArticleController extends BaseController
         $categories=Category::all();
         return view("account.article.create" ,compact('categories'));
     }
-
     public function store(ArticleRequest $request)
     {
 
@@ -149,75 +161,83 @@ class ArticleController extends BaseController
         Session::flash("msg", "تمت عملية الاضافة بنجاح");
         return redirect("/account/article/create");
     }
-
-    public function edit($id)
+    public function edit(Article $article)
     {
-        $item = Article::find($id);
+       // dd($article);
+       $item = $article;
+       // if (Gate::allows('articles.update', $item)) {
+       // if (auth()->user()->can('update', $item)) {
         if ($item == NULL) {
             Session::flash("msg", "e:الرجاء التاكد من الرابط المطلوب");
             return redirect("/account/article");
         }
         $categories=Category::all();
         return view("account.article.edit", compact("item",'categories'));
+      //  }else{
+        //   return redirect('/account/home/noaccess');
+        //}
     }
-    
     public function update(ArticleRequest $request, $id)
     {
 		$item = Article::find($id);
-        if ($item == NULL) {
-            Session::flash("msg", "e:الرجاء التاكد من الرابط المطلوب");
+        if (Gate::allows('articles.update', $item)) {
+
+            if ($item == NULL) {
+                Session::flash("msg", "e:الرجاء التاكد من الرابط المطلوب");
+                return redirect("/account/article");
+            }
+            $rule = [
+                'summary' => 'required|string|max:500',
+            ];
+            if ($request->hasFile('imge'))
+                $rule['imge'] = 'image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+
+            if ($request->hasFile('files'))
+                $rule['files.*'] = 'image|mimes:jpeg,png,jpg,gif,svg';
+            $valid = $this->validate($request, $rule);
+
+            if ($request->hasFile('files')) {
+                foreach ($request->file('files') as $file) {
+                    $file->move(public_path() . '/newsfile/' . $id . '/images', $file->getClientOriginalName());
+                    Files::create(['file' => $file->getClientOriginalName(), 'news_id' => $id]);
+                }
+            }
+
+            $mycontect = $request->input('news');
+            $mycontect2 = str_replace('data-filename="', 'src="' . asset('/newsfile/' . $id . '/images/') . "/", $mycontect);
+            if ($request->hasFile('imge')) {
+                //delete old
+                $aoldimg = $item->getAttribute('imge');
+                $mypath = public_path() . '/newsfile/' . $id . '/images';
+                if (file_exists($mypath . $aoldimg)) {
+                    unlink($mypath . $aoldimg);
+                }
+                //add newimg
+                $imge = $request->file('imge');
+                $imge->move(public_path() . '/newsfile/' . $id, $imge->getClientOriginalName());
+                $item->imge = $imge->getClientOriginalName();
+            }
+            if (Storage::disk('uploads')->exists('/newsfile/' . $id . '/myfile.txt')) {
+                Storage::disk('uploads')->delete('/newsfile/' . $id . '/myfile.txt');
+            }
+
+            Storage::disk('uploads')->put('/newsfile/' . $id . '/myfile.txt', $mycontect2);
+            unset($request['news']);
+            $item->update($request->all());
+
+            $users_ids = User::pluck('id')->toArray();
+            for ($i = 0; $i < count($users_ids); $i++) {
+                if (Auth::user()->account->links->contains(\App\Link::where('title', '=', 'notifications control')->first()->id))
+                    NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'تعديل', 'title' => 'تم تعديل خبر', 'link' => '/account/article/']);
+
+            }
+
+            Session::flash("msg", "i:تمت عملية الحفظ بنجاح");
             return redirect("/account/article");
+        }else{
+            return redirect('/account/home/noaccess');
         }
-        $rule = [
-            'summary' => 'required|string|max:500',
-        ];
-        if ($request->hasFile('imge'))
-            $rule['imge'] = 'image|mimes:jpeg,png,jpg,gif,svg|max:2048';
-
-        if ($request->hasFile('files'))
-            $rule['files.*'] = 'image|mimes:jpeg,png,jpg,gif,svg';
-        $valid = $this->validate($request, $rule);
-
-        if ($request->hasFile('files')) {
-            foreach ($request->file('files') as $file) {
-                $file->move(public_path() . '/newsfile/' . $id . '/images', $file->getClientOriginalName());
-                Files::create(['file' => $file->getClientOriginalName(), 'news_id' => $id]);
-            }
-        }
-
-        $mycontect = $request->input('news');
-        $mycontect2 = str_replace('data-filename="', 'src="' . asset('/newsfile/' . $id . '/images/') . "/", $mycontect);
-        if ($request->hasFile('imge')) {
-            //delete old
-            $aoldimg = $item->getAttribute('imge');
-            $mypath = public_path() . '/newsfile/' . $id . '/images';
-            if (file_exists($mypath . $aoldimg)) {
-                unlink($mypath . $aoldimg);
-            }
-            //add newimg
-            $imge = $request->file('imge');
-            $imge->move(public_path() . '/newsfile/' . $id, $imge->getClientOriginalName());
-            $item->imge = $imge->getClientOriginalName();
-        }
-        if (Storage::disk('uploads')->exists('/newsfile/' . $id . '/myfile.txt')) {
-            Storage::disk('uploads')->delete('/newsfile/' . $id . '/myfile.txt');
-        }
-
-        Storage::disk('uploads')->put('/newsfile/' . $id . '/myfile.txt', $mycontect2);
-        unset($request['news']);
-        $item->update($request->all());
-
-        $users_ids = User::pluck('id')->toArray();
-        for ($i = 0; $i < count($users_ids); $i++) {
-            if (Auth::user()->account->links->contains(\App\Link::where('title', '=', 'notifications control')->first()->id))
-                NotificationController::insert(['user_id' => $users_ids[$i], 'type' => 'تعديل', 'title' => 'تم تعديل خبر', 'link' => '/account/article/']);
-
-        }
-
-        Session::flash("msg", "i:تمت عملية الحفظ بنجاح");
-        return redirect("/account/article");
     }
-
     public function delete($id)
     { 
         $item =Article::find($id);
@@ -236,16 +256,20 @@ class ArticleController extends BaseController
      }
     public function deletegroup(Request $request)
     {
-        if($request->ids=='')
-            Session::flash("msg","e:لم يتم تحديد أي عنصر");
-        else
-            Session::flash("msg","تمت عملية الحذف بنجاح");
+        $this->authorize('deletegroup', Article::class);
+        // if (Gate::allows('articles.deleteg')) {
+            if ($request->ids == '')
+                Session::flash("msg", "e:لم يتم تحديد أي عنصر");
+            else
+                Session::flash("msg", "تمت عملية الحذف بنجاح");
 
-        $items = preg_split('/,/',$request->ids);
+            $items = preg_split('/,/', $request->ids);
 
 
-        Article::destroy($items);
-        return redirect("/account/article");
+            Article::destroy($items);
+            return redirect("/account/article");
+       // }else
+      //      return 'dont touch';
     }
    
 

@@ -65,9 +65,12 @@
                         <td style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{$a->account->full_name}}</td>
                         <td><input class="cbActive" type="checkbox" {{$a->active==1?"checked":""}} value="{{$a->id}}"/>
                         </td>
-                        <td style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                                <a class="btn btn-xs btn-primary" title="تعديل" href="/account/article/{{$a->id}}/edit"><i
+                       <td style="max-width: 100px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                               @can('update',$a)
+
+                           <a class="btn btn-xs btn-primary" title="تعديل" href="/account/article/{{$a->id}}/edit"><i
                                             class="fa fa-edit"></i></a>
+                           @endcan
 <a class="btn btn-xs btn-primary" title="تعليقاته" href="/account/comment/commentinart/{{$a->id}}">تعليقاته</a>
                            <a class="btn btn-xs Confirm btn-danger" title="يمكن حذفه "
                               href="/account/article/delete/{{$a->id}}"><i

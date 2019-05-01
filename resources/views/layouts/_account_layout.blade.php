@@ -159,7 +159,7 @@ if (auth()->user()) {
                 </li>
 
             </ul>
-            <ul class="nav navbar-nav pull-right">
+            @if(auth()->user()) <ul class="nav navbar-nav pull-right">
                 <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                     <?php
                     $count = count(auth()->user()->notifications()->whereNull('read_at')->get()->toArray());
@@ -242,7 +242,7 @@ if (auth()->user()) {
                     </ul>
                 </li>
 
-            </ul>
+            </ul>@endif
         </div>
         <!-- END TOP NAVIGATION MENU -->
     </div>
@@ -255,7 +255,7 @@ if (auth()->user()) {
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
     <!-- BEGIN SIDEBAR -->
-    <div class="page-sidebar-wrapper">
+    @if(auth()->user()) <div class="page-sidebar-wrapper">
         <div class="page-sidebar navbar-collapse collapse">
             <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true"
                 data-slide-speed="200" style="padding-top: 20px">
@@ -309,7 +309,7 @@ if (auth()->user()) {
             <!-- END SIDEBAR MENU -->
         </div>
         <!-- END SIDEBAR -->
-    </div>
+    </div>@endif
     <!-- END SIDEBAR -->
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
@@ -431,7 +431,7 @@ if (auth()->user()) {
     });
 </script>
 <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
-<script>
+@if(auth()->user()) <script>
 
     // Enable pusher logging - don't include this in production
     Pusher.logToConsole = true;
@@ -462,6 +462,7 @@ if (auth()->user()) {
         // }
     });
 </script>
+@endif
 @yield("js")
 </body>
 

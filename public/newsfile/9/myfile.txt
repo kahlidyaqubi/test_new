@@ -1,0 +1,1 @@
+<p><img style="width: 684px;"><img src="http://127.0.0.1:8000/newsfile/9/images/maxresdefault.jpg" style="width: 684px;"><img style="width: 684px;" src="http://127.0.0.1:8000/newsfile/9/images/56429322_1753390381428037_5193572328037941248_n.jpg"><br></p>

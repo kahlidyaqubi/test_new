@@ -18,6 +18,7 @@ class CreateAccountsTable extends Migration
             $table->string('full_name');
             $table->string('mobile')->nullable();
             $table->string('image')->nullable();
+            $table->boolean('super_admin')->default(0);
             $table->integer('user_id');
             $table->timestamps();
         });

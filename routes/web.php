@@ -61,6 +61,8 @@ Route::get('/account/account/deletegrope', 'Account\AccountController@deletegrou
 Route::resource("/account/account", "Account\AccountController");
 Route::get('/account/account/delete/{id}', 'Account\AccountController@delete');
 Route::post('/account/account/permission/{id}', 'Account\AccountController@permissionPost');
+/// chat
+Route::get('/chat', 'Account\AccountController@accountchat');
 //ادارة الفئات
 Route::get('/account/category/deletegrope', 'Account\CategoryController@deletegroup');
 Route::resource("/account/category", "Account\CategoryController");
@@ -93,3 +95,45 @@ Route::get('/article/{id}', 'Article\ArticleController@article_show');
 Route::post('/article/{id}', 'Article\ArticleController@addcoment');
 Route::get('/section/{id}', 'Article\ArticleController@section');
 Route::get('/search', 'Article\ArticleController@article_search');
+////////////////////////////
+Route::get('/charts','Article\ArticleController@article_charts');
+Route::get('/categories_ax','Article\ArticleController@categories_axios');
+Route::get('/articles_ax','Article\ArticleController@article_charts_axios');
+Route::get('/charts-axios','Article\ArticleController@article_charts_view');
+Route::get('/calender_show','Account\ArticleController@calender_show');
+Route::get('/editor_show','Account\ArticleController@editor_show');
+////////////////////////////
+
+
+
+////////////////////////////
+Route::get('/encrequst', function (){
+
+    $citizen =\App\Account::all()->toArray();
+    function array_to_xml($array, &$xml_user_info) {
+        foreach($array as $key => $value) {
+            if(is_array($value)) {
+                if(!is_numeric($key)){
+                    $subnode = $xml_user_info->addChild("$key");
+                    array_to_xml($value, $subnode);
+                }else{
+                    $subnode = $xml_user_info->addChild("item$key");
+                    array_to_xml($value, $subnode);
+                }
+            }else {
+                $xml_user_info->addChild("$key",htmlspecialchars("$value"));
+            }
+        }
+    }
+    $xml_citizen = new SimpleXMLElement("<?xml version=\"1.0\"?><citizen></citizen>");
+    //dd($xml_citizen);
+    array_to_xml($citizen,$xml_citizen);
+    $xml_file = $xml_citizen->asXML('users.xml');
+    $xml2=simplexml_load_file("users.xml") or dd("Error: Cannot create object");
+    //$mystring =$xml2->saveXML();
+    //dd($mystring);
+    $x='';
+    $z= openssl_private_encrypt ( $xml2 , $x, null );
+dd($z);
+});
+

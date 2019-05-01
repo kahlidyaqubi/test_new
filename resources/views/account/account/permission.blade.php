@@ -13,7 +13,6 @@
 
             <?php
                 $links = \DB::table("links")->where("parent_id",0)->get();
-
                 ?>
 
                     <ul class="list-unstyled">

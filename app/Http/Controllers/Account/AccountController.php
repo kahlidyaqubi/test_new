@@ -215,7 +215,6 @@ class AccountController extends BaseController
         return redirect("/account/account");
     }
 
-
     public function permission($id)
     {
         $item = Account::find($id);
@@ -241,5 +240,9 @@ class AccountController extends BaseController
         }
         Session::flash("msg", "i:تمت عملية الحفظ بنجاح");
         return redirect("/account/account");
+    }
+
+    public function accountchat(){
+        return view("account.account.accountchat");
     }
 }

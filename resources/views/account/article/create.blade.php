@@ -32,9 +32,9 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label" style="text-align:right;">الصورة الرئيسية</label>
+            <label class="col-sm-2 col-form-label " style="text-align:right;">الصورة الرئيسية</label>
             <div class="col-md-8">
-                <input type="file" class="form-control" name="imge"
+                <input type="file" class="form-control note-image-input" accept="image/*" name="imge"
                        placeholder="Enter text" required autofocus>
             </div>
         </div>
@@ -96,7 +96,8 @@
     <script>
         $(document).ready(function () {
             $(".note-codable").attr("name", "news");
-            $("[name=files]").attr("name", "files[]");
+           $("[name=files]").attr({"name": "files[]","onchange":"javascript:$(\"[name='files[]']\").attr({ \"readonly\": \"readonly\", \"title\": \"اضافة المرفقات يكون خلال خطوة واحدة\" });"});
+
 
             $('#thesubmitform').on('click', function (e) {
 

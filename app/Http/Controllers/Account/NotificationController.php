@@ -27,26 +27,28 @@ class NotificationController extends BaseController
     }
      static function insert($not_body){
          $a=Notification::create($not_body);
-         $items=Account::where('user_id','=',$a->user_id)->first()->user->notifications()->whereNull('read_at')->get();
-         $options = array(
-             'cluster' => 'ap2',
-             'useTLS' => true
-         );
-         $pusher = new \Pusher\Pusher(
-             '80aa60745d8088197153',
-             '15db4001ecd791fa50b3',
-             '704776',
-             $options
-         );
+         if(Account::where('user_id','=',$a->user_id)->first()) {
+             $items = Account::where('user_id', '=', $a->user_id)->first()->user->notifications()->whereNull('read_at')->get();
+             $options = array(
+                 'cluster' => 'ap2',
+                 'useTLS' => true
+             );
+             $pusher = new \Pusher\Pusher(
+                 '80aa60745d8088197153',
+                 '15db4001ecd791fa50b3',
+                 '704776',
+                 $options
+             );
 
-         $data['type'] = $a->type;
-         $data['user_id'] = $a->user_id;
-         $data['title'] = $a->title;
-         $data['date'] = $a->created_at->format('m/d/Y');
-         $data['link'] = $a->link;
-         $data['num_notif'] = count($items->toArray());
-         $pusher->trigger('my-channel', $data['user_id'].'', $data);
-     }
+             $data['type'] = $a->type;
+             $data['user_id'] = $a->user_id;
+             $data['title'] = $a->title;
+             $data['date'] = $a->created_at->format('m/d/Y');
+             $data['link'] = $a->link;
+             $data['num_notif'] = count($items->toArray());
+             $pusher->trigger('my-channel', $data['user_id'] . '', $data);
+         }
+    }
     public function store(Request $request)
     {
        /* $options = array(

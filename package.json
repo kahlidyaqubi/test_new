@@ -10,7 +10,7 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
-        "axios": "^0.18",
+        "axios": "^0.18.0",
         "bootstrap": "^4.0.0",
         "cross-env": "^5.1",
         "jquery": "^3.2",
@@ -18,5 +18,19 @@
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
         "vue": "^2.5.7"
+    },
+    "dependencies": {
+        "@amcharts/amcharts4": "^4.3.14",
+        "@syncfusion/ej2-vue-buttons": "^17.1.42",
+        "@syncfusion/ej2-vue-calendars": "^17.1.42",
+        "@syncfusion/ej2-vue-documenteditor": "^17.1.42",
+        "@syncfusion/ej2-vue-dropdowns": "^17.1.42",
+        "@syncfusion/ej2-vue-inputs": "^17.1.42",
+        "@syncfusion/ej2-vue-navigations": "^17.1.42",
+        "@syncfusion/ej2-vue-popups": "^17.1.42",
+        "@syncfusion/ej2-vue-schedule": "^17.1.42",
+        "basic-vue-chat": "^0.3.5",
+        "font-awesome": "^4.7.0",
+        "vue-beautiful-chat": "^2.2.0"
     }
 }

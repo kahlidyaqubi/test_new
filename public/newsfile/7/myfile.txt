@@ -1,1 +1,1 @@
-<p>حبة حبتين</p>
+<p><img src="http://127.0.0.1:8000/newsfile/7/images/تنزيل.jpg" style="width: 329px;"><img src="http://127.0.0.1:8000/newsfile/7/images/maxresdefault.jpg" style="width: 684px;"><img style="width: 684px;"><br></p>

@@ -1,0 +1,1 @@
+<p><img src="http://127.0.0.1:8000/newsfile/12/images/wefwrf.jpg" style="width: 684px;"><br></p>

@@ -10,7 +10,7 @@ class Account extends Model
     
     protected $table = "accounts";
     protected $primaryKey='id';
-    protected $fillable =['user_id','full_name','mobile','image'];
+    protected $fillable =['user_id','full_name','super_admin','mobile','image'];
 
     function user(){
         return $this->hasOne('App\User','id','user_id');
