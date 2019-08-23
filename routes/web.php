@@ -10,6 +10,22 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('songs/create', [
+    'uses' => 'SongsController@create',
+    'as' => 'song.create'
+]);
+
+Route::post('songs', [
+    'uses' => 'SongsController@store',
+    'as' => 'song.store'
+]);
+
+/*Route::get('test_test', function () {
+    \App\Forms\SongForm::add('test', 'button', [
+        'attr' => ['class' => 'btn btn-primary']
+    ]);
+    dd('succsse');
+});*/
 
 Route::get('/welcom', function () {
     if (auth()->user())

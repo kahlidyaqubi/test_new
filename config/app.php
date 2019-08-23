@@ -163,6 +163,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         'Barryvdh\TranslationManager\ManagerServiceProvider',
+        Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
+        'Datatables' => Yajra\DataTables\Facades\DataTables::class,
 
     ],
 
@@ -214,15 +217,15 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         //'PDF' => Barryvdh\DomPDF\Facade::class,
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
-
+        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class
 
     ],
     'font_path' => base_path('resources/fonts/'),
     'font_data' => [
         'examplefont' => [
-            'R'  => 'ExampleFont-Regular.ttf',    // regular font
-            'B'  => 'ExampleFont-Bold.ttf',       // optional: bold font
-            'I'  => 'ExampleFont-Italic.ttf',     // optional: italic font
+            'R' => 'ExampleFont-Regular.ttf',    // regular font
+            'B' => 'ExampleFont-Bold.ttf',       // optional: bold font
+            'I' => 'ExampleFont-Italic.ttf',     // optional: italic font
             'BI' => 'ExampleFont-Bold-Italic.ttf', // optional: bold-italic font
             'useOTL' => 0xFF,    // required for complicated langs like Persian, Arabic and Chinese
             'useKashida' => 75,  // required for complicated langs like Persian, Arabic and Chinese
@@ -230,6 +233,6 @@ return [
         // ...add as many as you want.
     ],
     // ...
-	
-       'tempDir' => base_path('public/storage/'),
+
+    'tempDir' => base_path('public/storage/'),
 ];

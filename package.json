@@ -31,6 +31,7 @@
         "@syncfusion/ej2-vue-schedule": "^17.1.42",
         "basic-vue-chat": "^0.3.5",
         "font-awesome": "^4.7.0",
+        "formeo": "^1.1.1",
         "vue-beautiful-chat": "^2.2.0"
     }
 }

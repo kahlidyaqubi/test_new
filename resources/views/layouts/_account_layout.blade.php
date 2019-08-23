@@ -159,7 +159,8 @@ if (auth()->user()) {
                 </li>
 
             </ul>
-            @if(auth()->user()) <ul class="nav navbar-nav pull-right">
+            @if(auth()->user()) 
+				<ul class="nav navbar-nav pull-right">
                 <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                     <?php
                     $count = count(auth()->user()->notifications()->whereNull('read_at')->get()->toArray());
@@ -431,7 +432,8 @@ if (auth()->user()) {
     });
 </script>
 <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
-@if(auth()->user()) <script>
+@if(auth()->user()) 
+	<script>
 
     // Enable pusher logging - don't include this in production
     Pusher.logToConsole = true;

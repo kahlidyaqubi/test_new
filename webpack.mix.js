@@ -15,4 +15,5 @@ mix.js('resources/js/app.js', 'public/js')
 mix.js('resources/js/charts.js', 'public/js')
 mix.js('resources/js/editor.js', 'public/js')
 mix.js('resources/js/chate.js', 'public/js')
+mix.js('resources/js/formeo_editor.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
